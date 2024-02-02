@@ -128,8 +128,17 @@ table {
 *::after {
   box-sizing: border-box;
 }
+link {
+  text-decoration: none;
+}
 
 .app {
   min-height: 100vh;
   height: 100%;
+
+  padding-top: 80px;
+}
+
+body {
+  font-family: Verdana, sans-serif;
 }

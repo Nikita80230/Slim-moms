@@ -1,11 +1,14 @@
-import { Container } from "@/components";
+import { CalculateCalorieForm, Container, Header } from "@/components";
 
 import { StyledMainPage } from "./Styled";
 
 const MainPage = () => {
   return (
     <StyledMainPage>
-      <Container>MainPage</Container>
+      <Container>
+        <Header />
+        <CalculateCalorieForm />
+      </Container>
     </StyledMainPage>
   );
 };
