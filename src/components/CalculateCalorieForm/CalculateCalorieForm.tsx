@@ -1,3 +1,5 @@
+import { InputGroup } from "..";
+import RadioButtons from "../RadioButtons/RadioButton";
 import { StyledCalculateCalorieForm } from "./Styled";
 
 const CalculateCalorieForm = () => {
@@ -9,44 +11,28 @@ const CalculateCalorieForm = () => {
       <form className="calculateCaloriesForm">
         <div className="calculateCaloriesFormInputs">
           <div className="calculateCaloriesFormLeft">
-            <label>
-              <span className="labelText">height*</span>
-              <input type="text" name="height" />
-            </label>
-            <label>
-              <span className="labelText">age*</span>
-              <input type="text" name="age" />
-            </label>
-            <label>
-              <span className="labelText">Current weight*</span>
-              <input type="text" name="current-weight" />
-            </label>
+            <InputGroup required name={"height"} labelText="height" />
+            <InputGroup required name={"age"} labelText="age" />
+            <InputGroup
+              required
+              name={"currentWeight"}
+              labelText="current weight"
+            />
           </div>
           <div className="calculateCaloriesFormRight">
-            <label>
-              <span className="labelText">Desired weight *</span>
-              <input type="text" name="desired-weight" />
-            </label>
-
+            <InputGroup
+              required
+              className="desiredWeight"
+              name={"desiredWeight"}
+              labelText="desired weight"
+            />
             <div className="radioWrapper">
               <span className="radioTitle">Blood type *</span>
-              <div className="radioInput">
-                <label>
-                  <input type="radio" name="bloodType" id="1" value="1" />
-                  <span className="radioWrapperSpan">1</span>
-                </label>
-                <label>
-                  <input type="radio" name="bloodType" id="2" value="2" />
-                  <span className="radioWrapperSpan">2</span>
-                </label>
-                <label>
-                  <input type="radio" name="bloodType" id="3" value="3" />
-                  <span className="radioWrapperSpan">3</span>
-                </label>
-                <label>
-                  <input type="radio" name="bloodType" id="4" value="4" />
-                  <span className="radioWrapperSpan">4</span>
-                </label>
+              <div className="radioInputWrapper">
+                <InputGroup type="radio" name="bloodType" labelText="1" />
+                <InputGroup type="radio" name="bloodType" labelText="2" />
+                <InputGroup type="radio" name="bloodType" labelText="3" />
+                <InputGroup type="radio" name="bloodType" labelText="4" />
               </div>
             </div>
           </div>

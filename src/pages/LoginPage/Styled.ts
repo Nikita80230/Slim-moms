@@ -3,7 +3,7 @@ import styled from "styled-components";
 import backgroundPliama from "@/assets/images/background-pliama.png";
 import backgroundImg from "@/assets/images/Group4.png";
 
-export const StyledMainPage = styled.div`
+export const StyledLoginPage = styled.div`
   background-size: contain;
   background-position: right;
   background-repeat: no-repeat;

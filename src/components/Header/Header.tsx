@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import logo from "@/assets/images/logo-header.png";
 
@@ -10,9 +10,9 @@ const Header = () => {
   return (
     <StyledHeader>
       <div className="header">
-        <a className="logo" href="">
+        <Link className="logo" to={RoutePath.MAIN}>
           <img className="logoImg" src={logo} alt="logo" />
-        </a>
+        </Link>
         <div className="navigation">
           <NavLink className="headerLink" to={RoutePath.LOGIN}>
             log in

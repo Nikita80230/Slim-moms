@@ -1,5 +1,16 @@
+import { Container, Header, LoginForm } from "@/components";
+
+import { StyledLoginPage } from "./Styled";
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return (
+    <StyledLoginPage>
+      <Container>
+        <Header />
+        <LoginForm />
+      </Container>
+    </StyledLoginPage>
+  );
 };
 
 export default LoginPage;

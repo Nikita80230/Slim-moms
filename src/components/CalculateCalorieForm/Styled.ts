@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 export const StyledCalculateCalorieForm = styled.div`
-  max-width: 608px;
+  max-width: 520px;
   width: 100%;
+
+  .desiredWeight {
+    margin-bottom: 20px;
+  }
 
   .calculateCaloriesFormTitle {
     font-family: var(--font-family);
@@ -34,13 +38,6 @@ export const StyledCalculateCalorieForm = styled.div`
     width: 100%;
   }
 
-  .calculateCaloriesFormLeft > label {
-    display: flex;
-    flex-direction: column;
-
-    margin-bottom: 40px;
-  }
-
   .labelText {
     font-weight: 700;
     font-size: 14px;
@@ -49,32 +46,28 @@ export const StyledCalculateCalorieForm = styled.div`
     text-transform: capitalize;
   }
 
-  label > input {
-    border: none;
-    border-bottom: 1px solid #e0e0e0;
-  }
-
   .calculateCaloriesFormRight {
     max-width: 240px;
     width: 100%;
   }
 
-  .calculateCaloriesFormRight > label {
+  .radioInputWrapper {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 
-    max-width: 240px;
-    width: 100%;
+    /* margin-top: 28px; */
 
-    margin-bottom: 40px;
-  }
-
-  .radioWrapper {
+    color: #9b9faa;
   }
 
   .radioTitle {
     position: relative;
-    margin-bottom: 28px;
+
+    display: block;
+
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px;
+    margin-bottom: 8px;
 
     font-weight: 700;
     font-size: 14px;
@@ -83,29 +76,17 @@ export const StyledCalculateCalorieForm = styled.div`
     text-transform: capitalize;
   }
 
-  .radioTitle:after {
+  /* .radioTitle:after {
     content: "";
-    height: 1px; //You can change this if you want smaller/bigger borders
+    height: 1px;
     width: 240px;
-    // width: 100%;
-
-    // stroke-width: 2px;
 
     position: absolute;
     left: 0;
-    top: 33px; // If you want to set a smaller height and center it, change this value
+    top: 33px;
 
-    background-color: #e0e0e0; // The color of your border
-  }
-
-  .radioInput {
-    display: flex;
-    justify-content: space-between;
-
-    margin-top: 28px;
-
-    color: #9b9faa;
-  }
+    background-color: #e0e0e0;
+  } */
 
   .calculateCalorieFormButton {
     display: flex;
