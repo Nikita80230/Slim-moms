@@ -1,5 +1,5 @@
-import { InputGroup } from "..";
-import RadioButtons from "../RadioButtons/RadioButton";
+import { InputGroup } from "@/components";
+
 import { StyledCalculateCalorieForm } from "./Styled";
 
 const CalculateCalorieForm = () => {
