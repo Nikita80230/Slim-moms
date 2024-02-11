@@ -5,3 +5,8 @@ export enum RoutePath {
   DIARY = "/diary",
   CALCULATOR = "/calculator",
 }
+
+export type TNavLink = {
+  navLinkName: string;
+  navRoute: RoutePath;
+};

@@ -4,9 +4,9 @@ export const StyledCalculateCalorieForm = styled.div`
   max-width: 520px;
   width: 100%;
 
-  .desiredWeight {
+  /* .desiredWeight {
     margin-bottom: 20px;
-  }
+  } */
 
   .calculateCaloriesFormTitle {
     font-family: var(--font-family);
@@ -66,7 +66,7 @@ export const StyledCalculateCalorieForm = styled.div`
     display: block;
 
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px;
+    padding-bottom: 9px;
     margin-bottom: 8px;
 
     font-weight: 700;
