@@ -1,7 +1,13 @@
+import { SummaryTable } from "@/components";
+
 import { StyledUserDiarySection } from "./Styled";
 
 const UserDiarySection = () => {
-  return <StyledUserDiarySection>UserDiarySection</StyledUserDiarySection>;
+  return (
+    <StyledUserDiarySection>
+      <SummaryTable />
+    </StyledUserDiarySection>
+  );
 };
 
 export default UserDiarySection;

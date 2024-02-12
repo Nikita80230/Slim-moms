@@ -3,24 +3,13 @@ import {
   Container,
   Header,
   ProductsTable,
-  UserDiarySection,
+  SummaryTable,
+  // UserDiarySection,
 } from "@/components";
-
-import { StyledDiaryPage } from "./Styled";
 import DataPickerComponent from "@/components/DataPickerComponent/DataPickerComponent";
 
-// import { RoutePath, TNavLink } from "@/types/routes/routes";
-
-// const navLinks: TNavLink[] = [
-//   {
-//     navLinkName: "diary",
-//     navRoute: RoutePath.DIARY,
-//   },
-//   {
-//     navLinkName: "calculator",
-//     navRoute: RoutePath.CALCULATOR,
-//   },
-// ];
+import { StyledDiaryPage } from "./Styled";
+import RecommendedFoodList from "@/components/RecomendedFoodList/RecommendedFoodList";
 
 const DiaryPage = () => {
   return (
@@ -35,7 +24,9 @@ const DiaryPage = () => {
             {/* <UserDiarySection /> */}
           </div>
           <div className="rightContent">
-            <UserDiarySection />
+            {/* <UserDiarySection /> */}
+            <SummaryTable />
+            <RecommendedFoodList />
           </div>
         </main>
       </Container>

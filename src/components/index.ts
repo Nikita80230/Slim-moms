@@ -6,4 +6,5 @@ export { default as InputGroup } from "./InputGroup/InputGroup";
 export { default as LoginForm } from "./LoginForm/LoginForm";
 export { default as ProductsTable } from "./ProductsTable/ProductsTable";
 export { default as RegisterForm } from "./RegisterForm/RegisterForm";
+export { default as SummaryTable } from "./SummaryTable/SummaryTable";
 export { default as UserDiarySection } from "./UserDiarySection/UserDiarySection";
