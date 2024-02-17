@@ -5,8 +5,8 @@ export const StyledSummaryTable = styled.div`
   width: 100%;
   /* margin: 0 auto 0 125px; */
   margin-bottom: 60px;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
 
   .summaryTitle {
     margin-bottom: 40px;

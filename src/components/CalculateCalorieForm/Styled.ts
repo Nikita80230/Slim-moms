@@ -4,12 +4,8 @@ export const StyledCalculateCalorieForm = styled.div`
   max-width: 520px;
   width: 100%;
 
-  /* .desiredWeight {
-    margin-bottom: 20px;
-  } */
-
   .calculateCaloriesFormTitle {
-    font-family: var(--font-family);
+    font-family: inherit;
     font-weight: 700;
     font-size: 34px;
     line-height: 140%;
@@ -55,8 +51,6 @@ export const StyledCalculateCalorieForm = styled.div`
     display: flex;
     justify-content: space-between;
 
-    /* margin-top: 28px; */
-
     color: #9b9faa;
   }
 
@@ -75,18 +69,6 @@ export const StyledCalculateCalorieForm = styled.div`
     color: #9b9faa;
     text-transform: capitalize;
   }
-
-  /* .radioTitle:after {
-    content: "";
-    height: 1px;
-    width: 240px;
-
-    position: absolute;
-    left: 0;
-    top: 33px;
-
-    background-color: #e0e0e0;
-  } */
 
   .calculateCalorieFormButton {
     display: flex;
@@ -109,5 +91,49 @@ export const StyledCalculateCalorieForm = styled.div`
     letter-spacing: 0.04em;
     text-align: center;
     color: #fff;
+  }
+
+  /* ======================================@media (max-width: 768px)================================================= */
+  @media (max-width: 768px) {
+    .calculateCalorieFormButton {
+      margin-left: 0;
+      margin-right: auto;
+    }
+  }
+
+  /* =====================================@media (max-width: 564px)===================================== */
+
+  @media (max-width: 564px) {
+    .calculateCaloriesFormTitle {
+      margin-bottom: 68px;
+
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 140%;
+      color: #212121;
+    }
+
+    .calculateCalorieFormButton {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .calculateCaloriesFormInputs {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .calculateCaloriesFormLeft {
+      display: flex;
+      flex-direction: column;
+
+      max-width: unset;
+      width: 100%;
+    }
+
+    .calculateCaloriesFormRight {
+      max-width: unset;
+      width: 100%;
+    }
   }
 `;

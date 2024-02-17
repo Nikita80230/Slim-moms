@@ -8,3 +8,5 @@ export { default as ProductsTable } from "./ProductsTable/ProductsTable";
 export { default as RegisterForm } from "./RegisterForm/RegisterForm";
 export { default as SummaryTable } from "./SummaryTable/SummaryTable";
 export { default as UserDiarySection } from "./UserDiarySection/UserDiarySection";
+export { default as UserMenu } from "./UserMenu/UserMenu";
+export { default as Modal } from "./Modal/Modal";

@@ -10,4 +10,14 @@ export const StyledContainer = styled.div`
   padding-top: 3vh;
   padding-bottom: 3vh;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: 768px;
+    padding: 20px 32px;
+  }
+
+  @media (max-width: 564px) {
+    max-width: 564px;
+    padding: 20px 20px;
+  }
 `;

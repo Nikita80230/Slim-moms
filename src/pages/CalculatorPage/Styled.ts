@@ -27,9 +27,11 @@ export const StyledCalculatorPage = styled.div`
   }
   .rightContent {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
     max-width: 517px;
     width: 100%;
+
+    padding-left: 9vw;
   }
 `;

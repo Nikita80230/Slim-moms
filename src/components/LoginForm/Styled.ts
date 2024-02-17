@@ -39,25 +39,17 @@ export const StyledAuthForm = styled.div`
     border: none;
     border-bottom: 1px solid #e0e0e0;
   }
+
+  @media (max-width: 564px) {
+    max-width: unset;
+  }
 `;
 
 export const StyledBtnWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 16px;
-  button {
-    border: none;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 136px;
-    height: 44px;
-    color: ${(props) => props.theme.colors.dark};
-    text-align: center;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.24px;
-    text-transform: uppercase;
-  }
+
   button {
     padding: 13px 48px;
     max-width: 181px;
@@ -75,6 +67,10 @@ export const StyledBtnWrapper = styled.div`
     letter-spacing: 0.04em;
     text-align: center;
     color: #fff;
+
+    @media (max-width: 370px) {
+      padding: 13px 34px;
+    }
   }
   .register {
     border: 3px solid #fc842d;
@@ -86,5 +82,9 @@ export const StyledBtnWrapper = styled.div`
     letter-spacing: 0.04em;
     text-align: center;
     color: #fc842d;
+  }
+
+  @media (max-width: 564px) {
+    justify-content: center;
   }
 `;

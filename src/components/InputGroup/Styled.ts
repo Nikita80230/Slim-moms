@@ -132,6 +132,7 @@ export const StyledInputGroup = styled.label<{ $disabled?: boolean }>`
     font-size: 14px;
     letter-spacing: 0.04em;
     color: #9b9faa;
+    background-color: transparent;
     text-transform: capitalize;
 
     &:focus,

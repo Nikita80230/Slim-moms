@@ -1,8 +1,20 @@
-import { InputGroup } from "@/components";
+import { useState } from "react";
+
+import { InputGroup, Modal } from "@/components";
 
 import { StyledCalculateCalorieForm } from "./Styled";
 
 const CalculateCalorieForm = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <StyledCalculateCalorieForm>
       <h1 className="calculateCaloriesFormTitle">
@@ -38,10 +50,18 @@ const CalculateCalorieForm = () => {
           </div>
         </div>
 
-        <button className="calculateCalorieFormButton" type="button">
+        <button className="calculateCalorieFormButton" type="submit">
           Start losing weight
         </button>
+        <button
+          className="calculateCalorieFormButton"
+          type="button"
+          onClick={handleOpenModal}
+        >
+          test modal
+        </button>
       </form>
+      {isModalOpen && <Modal closeModal={handleCancel} isOpen={isModalOpen} />}
     </StyledCalculateCalorieForm>
   );
 };

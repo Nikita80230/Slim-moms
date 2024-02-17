@@ -12,6 +12,12 @@ export const StyledDiaryPage = styled.div`
     top right;
   background-size: 719px, 44%;
 
+  /* ======for laptop=========== */
+  /* background-position:
+    165% -10px,
+    top right;
+  background-size: 706px, 44%; */
+
   .content {
     display: flex;
     justify-content: space-between;
@@ -27,9 +33,12 @@ export const StyledDiaryPage = styled.div`
   }
   .rightContent {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
+
     flex-direction: column;
     max-width: 517px;
     width: 100%;
+
+    padding-left: 9vw;
   }
 `;

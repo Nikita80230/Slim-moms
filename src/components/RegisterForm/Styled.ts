@@ -39,6 +39,10 @@ export const StyledRegisterForm = styled.div`
     border: none;
     border-bottom: 1px solid #e0e0e0;
   }
+
+  @media (max-width: 564px) {
+    max-width: unset;
+  }
 `;
 
 export const StyledBtnWrapper = styled.div`
@@ -75,5 +79,13 @@ export const StyledBtnWrapper = styled.div`
     letter-spacing: 0.04em;
     text-align: center;
     color: #fc842d;
+
+    @media (max-width: 370px) {
+      padding: 13px 9px;
+    }
+  }
+
+  @media (max-width: 564px) {
+    justify-content: center;
   }
 `;

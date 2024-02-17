@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledRecommendedFoodList = styled.div`
-  margin: 0 auto 0 24%;
+  /* margin: 0 auto 0 24%; */
 
   .foodListTitle {
     margin-bottom: 37px;
