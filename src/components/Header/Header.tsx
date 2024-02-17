@@ -5,9 +5,9 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/images/logo-header.png";
 import mobileLogo from "@/assets/images/mobileLogo.png";
 import tabletLogo from "@/assets/images/tabletLogo.png";
+import { UserMenu } from "@/components";
 
 import { StyledHeader } from "./Styled";
-import { UserMenu } from "..";
 
 import { RoutePath } from "@/types/routes/routes";
 
