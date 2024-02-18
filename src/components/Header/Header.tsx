@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import { Link, NavLink } from "react-router-dom";
 
 import logo from "@/assets/images/logoHeader.png";
-import mobileLogo from "@/assets/images/mobileLogo.png";
+import mobileLogo from "@/assets/images/MobileLogo.png";
 import tabletLogo from "@/assets/images/tabletLogo.png";
 import { UserMenu } from "@/components";
 
