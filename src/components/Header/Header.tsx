@@ -36,15 +36,6 @@ const Header = () => {
     <StyledHeader>
       <nav className="header">
         <Link className="logo" to={RoutePath.MAIN}>
-          {/* {isMobile ? (
-            <img className="logoImg" src={mobileLogo} alt="logo" />
-          ) : (
-            <img
-              className="logoImg"
-              src={isTablet ? tabletLogo : logo}
-              alt="logo"
-            />
-          )} */}
           <img
             className="logoImg"
             src={logoByScreen[currentScreen]}
