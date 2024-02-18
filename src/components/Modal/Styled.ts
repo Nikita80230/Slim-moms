@@ -47,6 +47,20 @@ export const StyledModal = styled.div`
     display: block;
   }
 
+  .mobileCloseModalBtn {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+
+    padding: 10px;
+
+    border: none;
+
+    background: transparent;
+  }
+  .mobileCloseModalImg {
+  }
+
   .modalTitle {
     margin-bottom: 20px;
     padding: 0 20px;
@@ -123,23 +137,29 @@ export const StyledModal = styled.div`
   }
 
   @media (max-width: 564px) {
+    top: 82px;
+
     .modal {
       position: absolute;
-      bottom: 50%;
+      top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -46%);
 
       display: flex;
       flex-direction: column;
 
-      padding: 64px 82px;
+      padding: 64px 20px;
 
       max-width: 672px;
       width: 100%;
-      height: 574px;
+      height: calc(100vh - 122px);
 
       box-shadow: 0 22px 40px 0 rgba(0, 0, 0, 0.1);
       background: #fff;
+    }
+
+    .modalTitle {
+      font-size: 18px;
     }
   }
 `;

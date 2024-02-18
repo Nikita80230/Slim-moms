@@ -1,8 +1,10 @@
 import { FC, MouseEvent, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 
 import closeModalImg from "@/assets/images/closeModalImg.svg";
+import IconMobileCloseBtnSvg from "@/assets/images/mobileCloseBtnSvg.svg?react";
 
 import { StyledModal } from "./Styled";
 
@@ -18,6 +20,8 @@ interface KeyboardEvent {
 }
 
 const Modal: FC<Props> = ({ closeModal }) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 564px)" });
+
   const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.currentTarget === event.target) {
       closeModal();
@@ -40,10 +44,21 @@ const Modal: FC<Props> = ({ closeModal }) => {
 
   return createPortal(
     <StyledModal onClick={handleOverlayClick}>
-      <div className="modal">
-        <button className="closeModalBtn" type="button" onClick={closeModal}>
-          <img className="closeModalImg" src={closeModalImg} alt="close" />
+      {isMobile && (
+        <button
+          className="mobileCloseModalBtn"
+          type="button"
+          onClick={closeModal}
+        >
+          <IconMobileCloseBtnSvg className="mobileCloseModalImg" />
         </button>
+      )}
+      <div className="modal">
+        {!isMobile && (
+          <button className="closeModalBtn " type="button" onClick={closeModal}>
+            <img className="closeModalImg" src={closeModalImg} alt="close" />
+          </button>
+        )}
         <h2 className="modalTitle">Your recommended daily calorie intake is</h2>
         <p className="modalCaloriesAmount">
           2800
