@@ -5,6 +5,7 @@ import {
   DiaryPage,
   LoginPage,
   MainPage,
+  MobileAddProductPage,
   RegisterPage,
 } from "@/pages";
 
@@ -30,6 +31,10 @@ export const appRoutes = [
   {
     path: RoutePath.CALCULATOR,
     element: <CalculatorPage />,
+  },
+  {
+    path: RoutePath.MOBILE_ADD_PRODUCT_PAGE,
+    element: <MobileAddProductPage />,
   },
 ];
 

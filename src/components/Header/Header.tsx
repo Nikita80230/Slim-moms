@@ -20,7 +20,7 @@ const logoByScreen: Record<CurrentScreen, string> = {
 };
 
 const Header = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   let currentScreen: CurrentScreen = "desktop";
 
@@ -52,15 +52,21 @@ const Header = () => {
 };
 
 const AuthorizedUser = () => {
+  const isTablet = useMediaQuery({ query: "(max-width: 768px)" });
+
   return (
     // <StyledAuthorizedUser>
     <>
-      <NavLink className="headerLink" to={RoutePath.DIARY}>
-        Dairy
-      </NavLink>
-      <NavLink className="headerLink" to={RoutePath.CALCULATOR}>
-        Calculator
-      </NavLink>
+      {!isTablet && (
+        <>
+          <NavLink className="headerLink" to={RoutePath.DIARY}>
+            Dairy
+          </NavLink>
+          <NavLink className="headerLink" to={RoutePath.CALCULATOR}>
+            Calculator
+          </NavLink>
+        </>
+      )}
       <UserMenu />
     </>
     // </StyledAuthorizedUser>

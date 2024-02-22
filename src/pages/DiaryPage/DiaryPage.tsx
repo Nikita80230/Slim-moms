@@ -1,5 +1,6 @@
 import {
   AddNewProductForm,
+  AddNewProductMobileBtn,
   Container,
   Header,
   ProductsTable,
@@ -21,7 +22,7 @@ const DiaryPage = () => {
             <DataPickerComponent />
             <AddNewProductForm />
             <ProductsTable />
-            {/* <UserDiarySection /> */}
+            <AddNewProductMobileBtn />
           </div>
           <div className="rightContent">
             {/* <UserDiarySection /> */}

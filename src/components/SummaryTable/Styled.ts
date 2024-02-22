@@ -41,4 +41,12 @@ export const StyledSummaryTable = styled.div`
   .value:not(:last-child) {
     padding-bottom: 20px;
   }
+
+  @media (max-width: 960px) {
+    margin: 0;
+  }
+
+  @media (max-width: 564px) {
+    max-width: unset;
+  }
 `;

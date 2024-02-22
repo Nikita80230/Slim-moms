@@ -6,7 +6,19 @@ export const StyledUserMenu = styled.div`
 
   margin-left: auto;
 
+  .tablet_desktopUserMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .mobileBurgerMenuBtn {
+    display: none;
+  }
+
   .userName {
+    display: flex;
+    align-items: center;
     font-family: inherit;
     font-weight: 700;
     font-size: 14px;
@@ -36,5 +48,48 @@ export const StyledUserMenu = styled.div`
     letter-spacing: 0.04em;
     color: #9b9faa;
     background-color: transparent;
+  }
+
+  @media (max-width: 960px) {
+    align-items: center;
+
+    .divider {
+      transform: translateY(8px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tablet_desktopUserMenu {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 45px;
+    }
+    .mobileBurgerMenuBtn {
+      display: flex;
+
+      padding: 10px;
+
+      background-color: transparent;
+      border: none;
+    }
+
+    .divider {
+      transform: translateY(0px);
+    }
+  }
+  @media (max-width: 564px) {
+    .mobileBurgerMenuBtn {
+      display: flex;
+
+      padding: 10px;
+
+      background-color: transparent;
+      border: none;
+    }
+
+    .tablet_desktopUserMenu {
+      display: none;
+    }
   }
 `;

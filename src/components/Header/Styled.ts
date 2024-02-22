@@ -99,7 +99,7 @@ export const StyledHeader = styled.header`
 
       width: 100%;
 
-      padding-bottom: 5px;
+      padding-bottom: 0;
     }
 
     .headerLink {
@@ -116,7 +116,9 @@ export const StyledHeader = styled.header`
   }
   @media (max-width: 564px) {
     margin-bottom: 50px;
-
+    .logo {
+      margin-right: 8px;
+    }
     .header::after {
       content: "";
       width: 100vw;
@@ -125,6 +127,10 @@ export const StyledHeader = styled.header`
       left: -20px;
       bottom: 0;
       background-color: #e0e0e0;
+    }
+
+    .navigation {
+      padding-bottom: 0;
     }
   }
 `;

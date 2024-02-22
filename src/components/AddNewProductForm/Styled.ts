@@ -9,7 +9,7 @@ export const StyledAddNewProductForm = styled.form`
     display: flex;
     align-items: center;
     /* gap: 18px; */
-    margin-right: 87px;
+    margin-right: auto;
   }
 
   .productName {
@@ -33,5 +33,9 @@ export const StyledAddNewProductForm = styled.form`
 
     background-color: #fc842d;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  @media (max-width: 564px) {
+    display: none;
   }
 `;

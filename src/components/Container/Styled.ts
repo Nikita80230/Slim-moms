@@ -11,6 +11,11 @@ export const StyledContainer = styled.div`
   padding-bottom: 3vh;
   margin: 0 auto;
 
+  @media (max-width: 960px) {
+    max-width: 960px;
+    padding: 20px 32px;
+  }
+
   @media (max-width: 768px) {
     max-width: 768px;
     padding: 20px 32px;
