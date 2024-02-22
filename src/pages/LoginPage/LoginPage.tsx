@@ -5,8 +5,8 @@ import { StyledLoginPage } from "./Styled";
 const LoginPage = () => {
   return (
     <StyledLoginPage>
+      <Header />
       <Container>
-        <Header />
         <LoginForm />
       </Container>
     </StyledLoginPage>

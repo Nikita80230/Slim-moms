@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 export const StyledHeader = styled.header`
   width: 100%;
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
+
+  .headerOuter {
+    width: 100%;
+  }
 
   .header {
     display: flex;
@@ -59,7 +63,9 @@ export const StyledHeader = styled.header`
 
   @media (max-width: 768px) {
     margin-bottom: 75px;
-    position: relative;
+    .headerOuter {
+      position: relative;
+    }
 
     .header {
       display: flex;
@@ -67,10 +73,11 @@ export const StyledHeader = styled.header`
 
       width: 100%;
 
+      padding-top: 16px;
       padding-bottom: 16px;
     }
 
-    .header::after {
+    .headerOuter::after {
       content: "";
       width: 100vw;
       height: 2px;
@@ -131,6 +138,15 @@ export const StyledHeader = styled.header`
 
     .navigation {
       padding-bottom: 0;
+    }
+
+    .userMenuPanel {
+      display: flex;
+      justify-content: end;
+
+      padding: 10px 20px;
+
+      background: #eff1f3;
     }
   }
 `;

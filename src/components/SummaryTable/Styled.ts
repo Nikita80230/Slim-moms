@@ -36,10 +36,10 @@ export const StyledSummaryTable = styled.div`
     flex-direction: column;
   }
   .property:not(:last-child) {
-    padding-bottom: 20px;
+    margin-bottom: 20px;
   }
   .value:not(:last-child) {
-    padding-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   @media (max-width: 960px) {

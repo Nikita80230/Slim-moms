@@ -5,8 +5,8 @@ import { StyledRegisterPage } from "./Styled";
 const RegisterPage = () => {
   return (
     <StyledRegisterPage>
+      <Header />
       <Container>
-        <Header />
         <RegisterForm />
       </Container>
     </StyledRegisterPage>

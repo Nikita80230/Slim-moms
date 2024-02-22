@@ -9,7 +9,9 @@ export const StyledDiaryPage = styled.div`
   background-position:
     top right -68%,
     top right -52%;
-  background-size: 70%, 62%;
+  background-size:
+    70%,
+    62% 100%;
 
   background-repeat: no-repeat;
 
@@ -94,7 +96,7 @@ export const StyledDiaryPage = styled.div`
       padding-top: 80px;
     }
   }
-
+  /* ======================================@media (max-width: 564px)========================================== */
   @media (max-width: 564px) {
     background-image: url("${backgroundGrey}");
     background-position: bottom left;

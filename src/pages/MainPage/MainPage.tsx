@@ -7,8 +7,8 @@ const MainPage = () => {
 
   return (
     <StyledMainPage>
+      <Header />
       <Container>
-        <Header />
         <CalculateCalorieForm />
       </Container>
     </StyledMainPage>

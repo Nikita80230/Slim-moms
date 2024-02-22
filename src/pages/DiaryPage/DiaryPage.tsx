@@ -2,21 +2,21 @@ import {
   AddNewProductForm,
   AddNewProductMobileBtn,
   Container,
+  DataPickerComponent,
   Header,
   ProductsTable,
+  RecommendedFoodList,
   SummaryTable,
   // UserDiarySection,
 } from "@/components";
-import DataPickerComponent from "@/components/DataPickerComponent/DataPickerComponent";
 
 import { StyledDiaryPage } from "./Styled";
-import RecommendedFoodList from "@/components/RecomendedFoodList/RecommendedFoodList";
 
 const DiaryPage = () => {
   return (
     <StyledDiaryPage>
+      <Header />
       <Container>
-        <Header />
         <main className="content">
           <div className="leftContent">
             <DataPickerComponent />

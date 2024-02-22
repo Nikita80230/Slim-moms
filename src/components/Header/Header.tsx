@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/images/logoHeader.png";
 import mobileLogo from "@/assets/images/MobileLogo.png";
 import tabletLogo from "@/assets/images/tabletLogo.png";
-import { UserMenu } from "@/components";
+import { Container, UserMenu, UserMenuPanel } from "@/components";
 
 import { StyledHeader } from "./Styled";
 
@@ -34,19 +34,28 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <nav className="header">
-        <Link className="logo" to={RoutePath.MAIN}>
-          <img
-            className="logoImg"
-            src={logoByScreen[currentScreen]}
-            alt="logo"
-          />
-        </Link>
+      <Container>
+        <div className="headerOuter">
+          <nav className="header">
+            <Link className="logo" to={RoutePath.MAIN}>
+              <img
+                className="logoImg"
+                src={logoByScreen[currentScreen]}
+                alt="logo"
+              />
+            </Link>
 
-        <div className="navigation">
-          {isLoggedIn ? <AuthorizedUser /> : <NotAuthorizedUser />}
+            <div className="navigation">
+              {isLoggedIn ? <AuthorizedUser /> : <NotAuthorizedUser />}
+            </div>
+          </nav>
         </div>
-      </nav>
+      </Container>
+      {isMobile && isLoggedIn && (
+        <div className="userMenuPanel">
+          <UserMenuPanel />
+        </div>
+      )}
     </StyledHeader>
   );
 };

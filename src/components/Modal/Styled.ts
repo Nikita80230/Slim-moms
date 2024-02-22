@@ -141,7 +141,7 @@ export const StyledModal = styled.div`
 
     .modal {
       position: absolute;
-      top: 50%;
+      top: 49%;
       left: 50%;
       transform: translate(-50%, -46%);
 

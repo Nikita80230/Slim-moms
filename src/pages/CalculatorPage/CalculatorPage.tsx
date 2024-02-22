@@ -11,8 +11,8 @@ import RecommendedFoodList from "@/components/RecomendedFoodList/RecommendedFood
 const CalculatorPage = () => {
   return (
     <StyledCalculatorPage>
+      <Header />
       <Container>
-        <Header />
         <main className="content">
           <div className="leftContent">
             <CalculateCalorieForm />

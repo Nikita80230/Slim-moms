@@ -1,9 +1,14 @@
+import { AddNewProductMobileForm, Container, Header } from "@/components";
+
 import { StyledMobileAddProductPage } from "./Styled";
 
 const MobileAddProductPage = () => {
   return (
     <StyledMobileAddProductPage>
-      MobileAddProductPage
+      <Header />
+      <Container>
+        <AddNewProductMobileForm />
+      </Container>
     </StyledMobileAddProductPage>
   );
 };
