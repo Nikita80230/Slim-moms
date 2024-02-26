@@ -1,7 +1,20 @@
 import styled from "styled-components";
 
 export const StyledAddNewProductMobileForm = styled.div`
+  position: relative;
+
   padding-top: 80px;
+
+  .addProductCloseBtn {
+    position: absolute;
+    top: -130px;
+    left: 0;
+
+    padding: 15px;
+
+    border: none;
+    background: transparent;
+  }
 
   .addProductForm {
     display: flex;

@@ -4,13 +4,14 @@ export { default as AddNewProductMobileForm } from "./AddNewProductMobileForm/Ad
 export { default as CalculateCalorieForm } from "./CalculateCalorieForm/CalculateCalorieForm";
 export { default as Container } from "./Container/Container";
 export { default as DataPickerComponent } from "./DataPickerComponent/DataPickerComponent";
+export { default as ExitModal } from "./ExitModal/ExitModal";
 export { default as Header } from "./Header/Header";
 export { default as InputGroup } from "./InputGroup/InputGroup";
 export { default as LoginForm } from "./LoginForm/LoginForm";
 export { default as Modal } from "./Modal/Modal";
 export { default as ModalNavMenu } from "./ModalNavMenu/ModalNavMenu";
 export { default as ProductsTable } from "./ProductsTable/ProductsTable";
-export { default as RecommendedFoodList } from "./RecomendedFoodList/RecommendedFoodList";
+export { default as RecommendedFoodList } from "./RecommendedFoodList/RecommendedFoodList";
 export { default as RegisterForm } from "./RegisterForm/RegisterForm";
 export { default as SummaryTable } from "./SummaryTable/SummaryTable";
 export { default as UserDiarySection } from "./UserDiarySection/UserDiarySection";

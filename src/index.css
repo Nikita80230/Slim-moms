@@ -140,3 +140,7 @@ link {
 body {
   font-family: Verdana, sans-serif;
 }
+
+main {
+  padding-top: 80px;
+}

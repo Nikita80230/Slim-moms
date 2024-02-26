@@ -4,15 +4,15 @@ import {
   Header,
   SummaryTable,
 } from "@/components";
+import RecommendedFoodList from "@/components/RecommendedFoodList/RecommendedFoodList";
 
 import { StyledCalculatorPage } from "./Styled";
-import RecommendedFoodList from "@/components/RecomendedFoodList/RecommendedFoodList";
+import PageLayout from "../PageLayout/PageLayout";
 
 const CalculatorPage = () => {
   return (
     <StyledCalculatorPage>
-      <Header />
-      <Container>
+      <PageLayout>
         <main className="content">
           <div className="leftContent">
             <CalculateCalorieForm />
@@ -23,7 +23,7 @@ const CalculatorPage = () => {
             <RecommendedFoodList />
           </div>
         </main>
-      </Container>
+      </PageLayout>
     </StyledCalculatorPage>
   );
 };

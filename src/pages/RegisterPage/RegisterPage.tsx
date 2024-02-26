@@ -1,14 +1,16 @@
-import { Container, Header, RegisterForm } from "@/components";
+import { RegisterForm } from "@/components";
 
 import { StyledRegisterPage } from "./Styled";
+import PageLayout from "../PageLayout/PageLayout";
 
 const RegisterPage = () => {
   return (
     <StyledRegisterPage>
-      <Header />
-      <Container>
-        <RegisterForm />
-      </Container>
+      <PageLayout>
+        <main>
+          <RegisterForm />
+        </main>
+      </PageLayout>
     </StyledRegisterPage>
   );
 };

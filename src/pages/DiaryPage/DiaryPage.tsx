@@ -11,12 +11,12 @@ import {
 } from "@/components";
 
 import { StyledDiaryPage } from "./Styled";
+import PageLayout from "../PageLayout/PageLayout";
 
 const DiaryPage = () => {
   return (
     <StyledDiaryPage>
-      <Header />
-      <Container>
+      <PageLayout>
         <main className="content">
           <div className="leftContent">
             <DataPickerComponent />
@@ -25,12 +25,11 @@ const DiaryPage = () => {
             <AddNewProductMobileBtn />
           </div>
           <div className="rightContent">
-            {/* <UserDiarySection /> */}
             <SummaryTable />
             <RecommendedFoodList />
           </div>
         </main>
-      </Container>
+      </PageLayout>
     </StyledDiaryPage>
   );
 };

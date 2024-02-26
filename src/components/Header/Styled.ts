@@ -62,7 +62,7 @@ export const StyledHeader = styled.header`
   /* ===================================================max-width: 768px===================================================== */
 
   @media (max-width: 768px) {
-    margin-bottom: 75px;
+    /* margin-bottom: 75px; */
     .headerOuter {
       position: relative;
     }
@@ -122,7 +122,7 @@ export const StyledHeader = styled.header`
     }
   }
   @media (max-width: 564px) {
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     .logo {
       margin-right: 8px;
     }
