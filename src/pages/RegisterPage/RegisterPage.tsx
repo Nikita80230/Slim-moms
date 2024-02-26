@@ -1,7 +1,7 @@
 import { RegisterForm } from "@/components";
+import { PageLayout } from "@/pages";
 
 import { StyledRegisterPage } from "./Styled";
-import PageLayout from "../PageLayout/PageLayout";
 
 const RegisterPage = () => {
   return (

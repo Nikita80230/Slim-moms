@@ -1,7 +1,7 @@
 import { AddNewProductMobileForm } from "@/components";
+import { PageLayout } from "@/pages";
 
 import { StyledMobileAddProductPage } from "./Styled";
-import PageLayout from "../PageLayout/PageLayout";
 
 const MobileAddProductPage = () => {
   return (

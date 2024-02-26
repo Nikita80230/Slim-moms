@@ -1,13 +1,8 @@
-import {
-  CalculateCalorieForm,
-  Container,
-  Header,
-  SummaryTable,
-} from "@/components";
+import { CalculateCalorieForm, SummaryTable } from "@/components";
 import RecommendedFoodList from "@/components/RecommendedFoodList/RecommendedFoodList";
+import { PageLayout } from "@/pages";
 
 import { StyledCalculatorPage } from "./Styled";
-import PageLayout from "../PageLayout/PageLayout";
 
 const CalculatorPage = () => {
   return (

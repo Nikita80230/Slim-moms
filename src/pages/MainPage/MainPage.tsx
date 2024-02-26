@@ -1,7 +1,7 @@
-import { CalculateCalorieForm, Container, Header } from "@/components";
+import { CalculateCalorieForm } from "@/components";
+import { PageLayout } from "@/pages";
 
 import { StyledMainPage } from "./Styled";
-import PageLayout from "../PageLayout/PageLayout";
 
 const MainPage = () => {
   // const isModalOpened = true;

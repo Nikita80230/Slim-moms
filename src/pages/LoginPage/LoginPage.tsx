@@ -1,7 +1,7 @@
-import { Container, Header, LoginForm } from "@/components";
+import { LoginForm } from "@/components";
+import { PageLayout } from "@/pages";
 
 import { StyledLoginPage } from "./Styled";
-import PageLayout from "../PageLayout/PageLayout";
 
 const LoginPage = () => {
   return (

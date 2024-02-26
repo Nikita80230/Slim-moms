@@ -1,17 +1,14 @@
 import {
   AddNewProductForm,
   AddNewProductMobileBtn,
-  Container,
   DataPickerComponent,
-  Header,
   ProductsTable,
   RecommendedFoodList,
   SummaryTable,
-  // UserDiarySection,
 } from "@/components";
+import { PageLayout } from "@/pages";
 
 import { StyledDiaryPage } from "./Styled";
-import PageLayout from "../PageLayout/PageLayout";
 
 const DiaryPage = () => {
   return (

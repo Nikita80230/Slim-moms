@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 import backgroundPliama from "@/assets/images/background-pliama.png";
 import backgroundImg from "@/assets/images/Group4.png";
-
-import tabletLoginBackgroundLeaves from "@/assets/images/tabletLoginBackgroundLeaves.png";
 import tabletBackgroundFigure from "@/assets/images/tabletBackgroundFigure.png";
 import tabletBackgroundFruits from "@/assets/images/tabletBackgroundFruits.png";
+import tabletLoginBackgroundLeaves from "@/assets/images/tabletLoginBackgroundLeaves.png";
 
 export const StyledLoginPage = styled.div`
   background-size: contain;
