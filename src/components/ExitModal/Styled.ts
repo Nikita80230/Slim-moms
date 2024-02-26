@@ -81,7 +81,7 @@ export const StyledExitModal = styled.div`
   .acceptBtn {
     color: white;
     background: #fc842d;
-    box-shadow: 1px 3px 5px 0px rgba(96, 196, 112, 0.35);
+    box-shadow: 1px 3px 5px 0px rgb(188 96 29);
   }
   .cancelBtn {
     background: transparent;
