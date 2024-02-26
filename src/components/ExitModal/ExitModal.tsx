@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { StyledExitModal } from "./Styled";
 
-import MobileCloseBtnIcon from "@/assets/images/mobileCloseBtnSvg.svg?react";
+import CloseModalIcon from "@/assets/images/closeModalImg.svg?react";
 
 type Props = {
   onCancel: () => void;
@@ -19,7 +19,7 @@ const ExitModal: FC<Props> = ({ onCancel }) => {
     <StyledExitModal onClick={handleOverlayClick}>
       <div className="modal">
         <button type="button" className="closeBtn" onClick={onCancel}>
-          <MobileCloseBtnIcon />
+          <CloseModalIcon />
         </button>
         <p className="text">Do you really want to leave?</p>
         <div className="buttonsWrapper">
