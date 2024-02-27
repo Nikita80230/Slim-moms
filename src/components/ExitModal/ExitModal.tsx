@@ -3,6 +3,7 @@ import { FC } from "react";
 import { StyledExitModal } from "./Styled";
 
 import CloseModalIcon from "@/assets/images/closeModalImg.svg?react";
+import { createPortal } from "react-dom";
 
 type Props = {
   onCancel: () => void;
@@ -15,7 +16,7 @@ const ExitModal: FC<Props> = ({ onCancel }) => {
     }
   };
 
-  return (
+  return createPortal(
     <StyledExitModal onClick={handleOverlayClick}>
       <div className="modal">
         <button type="button" className="closeBtn" onClick={onCancel}>
@@ -31,7 +32,8 @@ const ExitModal: FC<Props> = ({ onCancel }) => {
           </button>
         </div>
       </div>
-    </StyledExitModal>
+    </StyledExitModal>,
+    document.getElementById("root") as HTMLDivElement
   );
 };
 
