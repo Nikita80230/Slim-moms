@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-import backgroundGrey from "@/assets/images/backgroundGrey.png";
-import tabletBackgroundGreyDiaryCalculator from "@/assets/images/tabletBackgroundGreyDiaryCalculator.png";
-import tabletDiaryCalculatorLeaves from "@/assets/images/tabletDiaryCalculatorLeaves.png";
-import tabletLoginBackgroundLeaves from "@/assets/images/tabletLoginBackgroundLeaves.png";
-
 export const StyledDiaryPage = styled.div`
   .content {
     display: flex;
