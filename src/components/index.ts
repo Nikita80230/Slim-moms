@@ -10,6 +10,7 @@ export { default as InputGroup } from "./InputGroup/InputGroup";
 export { default as LoginForm } from "./LoginForm/LoginForm";
 export { default as Modal } from "./Modal/Modal";
 export { default as ModalNavMenu } from "./ModalNavMenu/ModalNavMenu";
+export { default as PageLayout } from "./PageLayout/PageLayout";
 export { default as ProductsTable } from "./ProductsTable/ProductsTable";
 export { default as RecommendedFoodList } from "./RecommendedFoodList/RecommendedFoodList";
 export { default as RegisterForm } from "./RegisterForm/RegisterForm";

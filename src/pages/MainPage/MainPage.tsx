@@ -1,5 +1,4 @@
-import { CalculateCalorieForm } from "@/components";
-import { PageLayout } from "@/pages";
+import { CalculateCalorieForm, PageLayout } from "@/components";
 
 import { StyledMainPage } from "./Styled";
 
@@ -7,13 +6,11 @@ const MainPage = () => {
   // const isModalOpened = true;
 
   return (
-    <StyledMainPage>
-      <PageLayout>
-        <main>
-          <CalculateCalorieForm />
-        </main>
-      </PageLayout>
-    </StyledMainPage>
+    <PageLayout>
+      <StyledMainPage>
+        <CalculateCalorieForm />
+      </StyledMainPage>
+    </PageLayout>
   );
 };
 

@@ -1,17 +1,14 @@
-import { LoginForm } from "@/components";
-import { PageLayout } from "@/pages";
+import { LoginForm, PageLayout } from "@/components";
 
 import { StyledLoginPage } from "./Styled";
 
 const LoginPage = () => {
   return (
-    <StyledLoginPage>
-      <PageLayout>
-        <main>
-          <LoginForm />
-        </main>
-      </PageLayout>
-    </StyledLoginPage>
+    <PageLayout>
+      <StyledLoginPage>
+        <LoginForm />
+      </StyledLoginPage>
+    </PageLayout>
   );
 };
 

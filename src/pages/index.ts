@@ -4,4 +4,3 @@ export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as MainPage } from "./MainPage/MainPage";
 export { default as MobileAddProductPage } from "./MobileAddProductPage/MobileAddProductPage";
 export { default as RegisterPage } from "./RegisterPage/RegisterPage";
-export { default as PageLayout } from "./PageLayout/PageLayout";

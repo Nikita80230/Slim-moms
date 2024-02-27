@@ -128,7 +128,7 @@ table {
 *::after {
   box-sizing: border-box;
 }
-link {
+a {
   text-decoration: none;
 }
 
@@ -139,8 +139,4 @@ link {
 
 body {
   font-family: Verdana, sans-serif;
-}
-
-main {
-  padding-top: 80px;
 }

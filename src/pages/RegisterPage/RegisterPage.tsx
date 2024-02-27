@@ -1,17 +1,14 @@
-import { RegisterForm } from "@/components";
-import { PageLayout } from "@/pages";
+import { PageLayout, RegisterForm } from "@/components";
 
 import { StyledRegisterPage } from "./Styled";
 
 const RegisterPage = () => {
   return (
-    <StyledRegisterPage>
-      <PageLayout>
-        <main>
-          <RegisterForm />
-        </main>
-      </PageLayout>
-    </StyledRegisterPage>
+    <PageLayout>
+      <StyledRegisterPage>
+        <RegisterForm />
+      </StyledRegisterPage>{" "}
+    </PageLayout>
   );
 };
 

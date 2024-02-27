@@ -2,19 +2,19 @@ import {
   AddNewProductForm,
   AddNewProductMobileBtn,
   DataPickerComponent,
+  PageLayout,
   ProductsTable,
   RecommendedFoodList,
   SummaryTable,
 } from "@/components";
-import { PageLayout } from "@/pages";
 
 import { StyledDiaryPage } from "./Styled";
 
 const DiaryPage = () => {
   return (
-    <StyledDiaryPage>
-      <PageLayout>
-        <main className="content">
+    <PageLayout isSpecialBg>
+      <StyledDiaryPage>
+        <div className="content">
           <div className="leftContent">
             <DataPickerComponent />
             <AddNewProductForm />
@@ -25,9 +25,9 @@ const DiaryPage = () => {
             <SummaryTable />
             <RecommendedFoodList />
           </div>
-        </main>
-      </PageLayout>
-    </StyledDiaryPage>
+        </div>
+      </StyledDiaryPage>
+    </PageLayout>
   );
 };
 

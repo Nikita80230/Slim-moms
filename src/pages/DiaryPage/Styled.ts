@@ -6,26 +6,6 @@ import tabletDiaryCalculatorLeaves from "@/assets/images/tabletDiaryCalculatorLe
 import tabletLoginBackgroundLeaves from "@/assets/images/tabletLoginBackgroundLeaves.png";
 
 export const StyledDiaryPage = styled.div`
-  background-position:
-    top right -68%,
-    top right -52%;
-  background-size:
-    70%,
-    62% 100%;
-
-  background-repeat: no-repeat;
-
-  min-height: 100vh;
-
-  background-image: url("${tabletLoginBackgroundLeaves}"),
-    url("${backgroundGrey}");
-
-  /* ======for laptop=========== */
-  /* background-position:
-    165% -10px,
-    top right;
-  background-size: 706px, 44%; */
-
   .content {
     display: flex;
     justify-content: space-between;
@@ -41,7 +21,6 @@ export const StyledDiaryPage = styled.div`
   }
   .rightContent {
     display: flex;
-    /* align-items: center; */
 
     flex-direction: column;
     max-width: 517px;
@@ -50,36 +29,12 @@ export const StyledDiaryPage = styled.div`
     padding-left: 9vw;
   }
 
-  /* ===========================================@media (max-width: 1024px)=========================================== */
-
-  @media (max-width: 1024px) {
-    background-position:
-      top right -68%,
-      top right -37%;
-    background-size: 70%, 62%;
-  }
-
   /* ========================================@media (max-width: 960px)============================================ */
 
   @media (max-width: 960px) {
-    background-position:
-      bottom right,
-      bottom left;
-    background-size:
-      40% 36%,
-      100% 35%;
-
-    background-repeat: no-repeat;
-
-    min-height: 100vh;
-
-    background-image: url("${tabletDiaryCalculatorLeaves}"),
-      url("${tabletBackgroundGreyDiaryCalculator}");
-
     .content {
       flex-direction: column;
       align-items: center;
-      /* gap: 135px; */
     }
 
     .leftContent {
@@ -98,10 +53,6 @@ export const StyledDiaryPage = styled.div`
   }
   /* ======================================@media (max-width: 564px)========================================== */
   @media (max-width: 564px) {
-    background-image: url("${backgroundGrey}");
-    background-position: bottom left;
-    background-size: 100% 46%;
-
     .rightContent {
       flex-direction: column;
     }
