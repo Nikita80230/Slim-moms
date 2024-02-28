@@ -5,7 +5,7 @@ import { InputGroup } from "@/components";
 
 import { StyledAddNewProductMobileForm } from "./Styled";
 
-import { RoutePath } from "@/types/routes/routes";
+import { RoutePath } from "@/types/Routes";
 
 const AddNewProductMobileForm = () => {
   return (

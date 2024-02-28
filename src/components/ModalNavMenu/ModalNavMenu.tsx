@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 import { StyledModalNavMenu } from "./Styled";
 
-import { RoutePath } from "@/types/routes/routes";
+import { RoutePath } from "@/types/Routes";
 
 // type Props = {
 //   closeModal: ()=> void;

@@ -9,7 +9,7 @@ import { Container, UserMenu, UserMenuPanel } from "@/components";
 
 import { StyledHeader } from "./Styled";
 
-import { RoutePath } from "@/types/routes/routes";
+import { RoutePath } from "@/types/Routes";
 
 type CurrentScreen = "desktop" | "tablet" | "mobile";
 
@@ -20,7 +20,7 @@ const logoByScreen: Record<CurrentScreen, string> = {
 };
 
 const Header = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   let currentScreen: CurrentScreen = "desktop";
 

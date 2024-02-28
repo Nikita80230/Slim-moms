@@ -8,7 +8,7 @@ import IconMobileCloseBtnSvg from "@/assets/images/mobileCloseBtnSvg.svg?react";
 
 import { StyledModal } from "./Styled";
 
-import { RoutePath } from "@/types/routes/routes";
+import { RoutePath } from "@/types/Routes";
 
 type Props = {
   closeModal: () => void;

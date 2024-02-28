@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 
 import { StyledInputGroup, StyledRadioGroup } from "./Styled";
 
@@ -9,6 +9,7 @@ type Props = {
   labelText: string;
   required?: boolean;
   disabled?: boolean;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   //FIX: VALUE
 };
 
@@ -19,11 +20,13 @@ const InputGroup: FC<Props> = ({
   labelText,
   required = false,
   disabled = false,
+  onChange,
 }) => {
   if (type === "radio") {
     return (
       <StyledRadioGroup className={className} $disabled={disabled}>
         <input
+          onChange={onChange}
           type="radio"
           name={name}
           required={required}
@@ -40,6 +43,7 @@ const InputGroup: FC<Props> = ({
   return (
     <StyledInputGroup className={className} $disabled={disabled}>
       <input
+        onChange={onChange}
         className="input"
         placeholder=" "
         type={type}
