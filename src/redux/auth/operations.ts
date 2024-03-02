@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { UserAuthData } from "@/types/UserTypes";
+import { UserAuthFormData } from "@/types/User";
 
 export const instance = axios.create({
   baseURL: "https://slimmom-backend.goit.global/",
@@ -10,7 +10,7 @@ export const instance = axios.create({
 
 export const registration = createAsyncThunk(
   "auth/registration",
-  async (registerFormData: UserAuthData, thunkApi) => {
+  async (registerFormData: UserAuthFormData, thunkApi) => {
     try {
       const response = await instance.post("/auth/register", registerFormData);
       toast.success("You was successfully registered, please login!!!");
@@ -25,10 +25,10 @@ export const registration = createAsyncThunk(
 
 export const login = createAsyncThunk(
   "auth/registration",
-  async (loginFormData: UserAuthData, thunkApi) => {
+  async (loginFormData: UserAuthFormData, thunkApi) => {
     try {
       const response = await instance.post("/auth/login", loginFormData);
-      toast.success("You was successfully registered, please login!!!");
+      toast.success("You was successfully logged in, please login!!!");
       console.log("login ", response.data);
       return response.data;
     } catch (error: any) {

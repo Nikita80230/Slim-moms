@@ -2,43 +2,28 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { login } from "./operations";
 
-import { UserResponse } from "@/types/UserTypes";
+import { UserLoginResponse, UserTodaySummary } from "@/types/User";
 // import { registration } from "./operations";
 
 type InitialAuthState = {
   isLoading: boolean;
-  isRegister: boolean;
   isLoggedIn: boolean;
   accessToken: null | string;
   refreshToken: null | string;
   sid: null | string;
-  todaySummary: any;
-  user: UserResponse;
+  todaySummary: UserTodaySummary | null | object;
+  user: UserLoginResponse | null;
 };
 
 const initialAuthState: InitialAuthState = {
   isLoading: false,
-  isRegister: false,
   isLoggedIn: false,
 
   accessToken: null,
   refreshToken: null,
   sid: null,
-  todaySummary: {},
-  user: {
-    email: null,
-    username: null,
-    userData: {
-      notAllowedProducts: null,
-      weight: null,
-      height: null,
-      age: null,
-      bloodType: null,
-      desiredWeight: null,
-      dailyRate: null,
-    },
-    id: null,
-  },
+  todaySummary: null,
+  user: null,
 };
 
 const authSlice = createSlice({
@@ -55,15 +40,14 @@ const authSlice = createSlice({
         (
           state,
           action: PayloadAction<{
-            user: UserResponse;
+            user: UserLoginResponse;
             accessToken: string;
             refreshToken: string;
             sid: string;
-            todaySummary: any;
+            todaySummary: UserTodaySummary | object;
           }>
         ) => {
           state.isLoading = false;
-          state.isRegister = true;
           state.user = action.payload.user;
           state.accessToken = action.payload.accessToken;
           state.refreshToken = action.payload.refreshToken;
@@ -73,7 +57,6 @@ const authSlice = createSlice({
       )
       .addCase(login.rejected, (state) => {
         state.isLoading = false;
-        state.isRegister = false;
       });
   },
 });

@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 
 import { registration } from "@/redux/auth/operations";
@@ -6,60 +6,70 @@ import { registration } from "@/redux/auth/operations";
 import { useAppDispatch } from "@/hooks/hooks";
 
 import { InputGroup } from "@/components";
+import { RoutePath } from "@/routes/routes";
 
 import { StyledBtnWrapper, StyledRegisterForm } from "./Styled";
 
-import { RoutePath } from "@/types/Routes";
-import { UserAuthData } from "@/types/UserTypes";
+import { UserAuthFormData } from "@/types/User";
+
+import * as yup from "yup";
+
+const personSchema = yup.object({
+  username: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required().min(8),
+});
 
 const RegisterForm = () => {
-  const [userRegisterFormData, setUserRegisterFormData] =
-    useState<UserAuthData>({
-      email: "",
-      password: "",
-      username: "",
-    });
-
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log(userRegisterFormData);
+  const formik = useFormik<Required<UserAuthFormData>>({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: personSchema,
+    onSubmit: (values) => {
+      console.log(values);
 
-    dispatch(registration(userRegisterFormData));
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserRegisterFormData({
-      ...userRegisterFormData,
-      [event.target.name]: event.target.value,
-    });
-  };
+      dispatch(registration(values));
+    },
+  });
 
   return (
     <StyledRegisterForm>
       <h2 className="authTitle">Register</h2>
-      <form className="authForm" onSubmit={handleSubmit}>
+      <form className="authForm" onSubmit={formik.handleSubmit}>
         <InputGroup
           required
           type="text"
-          name={"username"}
+          name="username"
           labelText="name"
-          onChange={handleChange}
+          value={formik.values.username}
+          onChange={formik.handleChange}
+          error={formik.errors.username}
+          touched={formik.touched.username}
         />
         <InputGroup
           required
           type="email"
           name={"email"}
           labelText="email"
-          onChange={handleChange}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.errors.email}
+          touched={formik.touched.email}
         />
         <InputGroup
           required
           type="password"
           name="password"
           labelText="password"
-          onChange={handleChange}
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.errors.password}
+          touched={formik.touched.password}
         />
         <StyledBtnWrapper>
           <button className="register button" type="submit">

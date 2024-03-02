@@ -1,25 +1,45 @@
-export type UserData = {
-  weight: null | number;
-  height: null | number;
-  age: null | number;
-  bloodType: null | number;
-  desiredWeight: null | number;
-  dailyRate: null | number;
-  notAllowedProducts: string[] | null;
+export type UserDairyData = {
+  weight: number;
+  height: number;
+  age: number;
+  bloodType: number;
+  desiredWeight: number;
+  dailyRate: number;
+  notAllowedProducts: string[];
 };
 
-export type UserAuthData = {
+export type UserAuthFormData = {
   email: string;
   password: string;
   username?: string;
 };
 
-export type UserResponse = {
+export type UserLoginResponse = {
   email: string | null;
   username: string | null;
   id: string | null;
-  userData: UserData | null;
+  userData: UserDairyData | null;
 };
+
+export type UserTodaySummary = {
+  date: string;
+  kcalLeft: number;
+  kcalConsumed: number;
+  dailyRate: number;
+  percentsOfDailyRate: number;
+  userId: string;
+  id: string;
+};
+
+// {
+//     "date": "2020-12-31",
+//     "kcalLeft": 1000,
+//     "kcalConsumed": 1000,
+//     "dailyRate": 2000,
+//     "percentsOfDailyRate": 50,
+//     "userId": "507f1f77bcf86cd799439011",
+//     "id": "507f1f77bcf86cd799439012"
+//   }
 
 // {
 //     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWRmNWU0Y2MzODYwODNmNmE4MTFmNTAiLCJzaWQiOiI2NWRmNWZmOGMzODYwODNmNmE4MTFmNTMiLCJpYXQiOjE3MDkxMzc5MTIsImV4cCI6MTcwOTE0MTUxMn0.c1kERuCx5PJ8Fo4IXE_JW-pfH1Fi428pfmn8xqDwlVo",

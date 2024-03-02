@@ -9,7 +9,11 @@ type Props = {
   labelText: string;
   required?: boolean;
   disabled?: boolean;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+
+  error?: string;
+  touched?: boolean;
   //FIX: VALUE
 };
 
@@ -20,7 +24,10 @@ const InputGroup: FC<Props> = ({
   labelText,
   required = false,
   disabled = false,
+  value = "",
   onChange,
+  touched,
+  error,
 }) => {
   if (type === "radio") {
     return (
@@ -31,6 +38,7 @@ const InputGroup: FC<Props> = ({
           name={name}
           required={required}
           disabled={disabled}
+          value={value}
         />
         <span className="fake" />
         <span className="radioWrapperSpan">
@@ -48,6 +56,7 @@ const InputGroup: FC<Props> = ({
         placeholder=" "
         type={type}
         name={name}
+        value={value}
         required={required}
         disabled={disabled}
       />
@@ -55,6 +64,7 @@ const InputGroup: FC<Props> = ({
         {labelText}
         {required && "*"}
       </span>
+      {error && touched && <span className="validationError">{error}</span>}
     </StyledInputGroup>
   );
 };

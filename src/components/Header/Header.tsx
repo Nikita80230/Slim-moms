@@ -9,7 +9,7 @@ import { Container, UserMenu, UserMenuPanel } from "@/components";
 
 import { StyledHeader } from "./Styled";
 
-import { RoutePath } from "@/types/Routes";
+import { RoutePath } from "@/routes/routes";
 
 type CurrentScreen = "desktop" | "tablet" | "mobile";
 

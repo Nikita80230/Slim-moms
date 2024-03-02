@@ -9,7 +9,7 @@ import {
   RegisterPage,
 } from "@/pages";
 
-import { RoutePath } from "@/types/Routes";
+import { RoutePath } from "@/routes/routes";
 
 export const appRoutes = [
   {

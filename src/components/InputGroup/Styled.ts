@@ -147,4 +147,14 @@ export const StyledInputGroup = styled.label<{ $disabled?: boolean }>`
       font-size: 12px;
     }
   }
+  .validationError {
+    position: absolute;
+    top: 120%;
+    left: 0;
+
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: #fc842d;
+  }
 `;

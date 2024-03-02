@@ -4,7 +4,7 @@ import addProductBtnImg from "@/assets/images/addProductBtnImg.png";
 
 import { StyledAddNewProductMobileBtn } from "./Style";
 
-import { RoutePath } from "@/types/Routes";
+import { RoutePath } from "@/routes/routes";
 
 const AddNewProductMobileBtn = () => {
   return (
