@@ -10,6 +10,9 @@ import {
 } from "@/pages";
 
 import { RoutePath } from "@/routes/routes";
+import { useAppDispatch } from "./hooks/hooks";
+import { useEffect } from "react";
+import { refresh } from "./redux/auth/operations";
 
 export const appRoutes = [
   {
@@ -39,6 +42,12 @@ export const appRoutes = [
 ];
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(refresh());
+  }, [dispatch]);
+
   return (
     <div className="app">
       <Routes>

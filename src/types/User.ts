@@ -15,9 +15,9 @@ export type UserAuthFormData = {
 };
 
 export type UserLoginResponse = {
-  email: string | null;
-  username: string | null;
-  id: string | null;
+  email: string;
+  username: string;
+  id: string;
   userData: UserDairyData | null;
 };
 
@@ -29,6 +29,48 @@ export type UserTodaySummary = {
   percentsOfDailyRate: number;
   userId: string;
   id: string;
+};
+
+export type GetUserInfoResponse = {
+  email: string;
+  username: string;
+  id: string;
+  userData: {
+    weight: number;
+    height: number;
+    age: number;
+    bloodType: number;
+    desiredWeight: number;
+    dailyRate: number;
+    notAllowedProducts: string[];
+  };
+  days: [
+    {
+      _id: string;
+      eatenProducts: [
+        {
+          title: string;
+          weight: number;
+          kcal: number;
+          id: string;
+        },
+      ];
+      date: string;
+      __v: number;
+      // -------------------------
+      daySummary: {
+        date: string;
+        kcalLeft: number;
+        kcalConsumed: number;
+        dailyRate: number;
+        percentsOfDailyRate: number;
+        userId: string;
+        _id: string;
+        __v: number;
+      };
+      // --------------------------------------
+    },
+  ];
 };
 
 // {

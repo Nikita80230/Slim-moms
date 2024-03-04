@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import * as yup from "yup";
 
 import { registration } from "@/redux/auth/operations";
 
@@ -11,8 +12,6 @@ import { RoutePath } from "@/routes/routes";
 import { StyledBtnWrapper, StyledRegisterForm } from "./Styled";
 
 import { UserAuthFormData } from "@/types/User";
-
-import * as yup from "yup";
 
 const personSchema = yup.object({
   username: yup.string().required(),
