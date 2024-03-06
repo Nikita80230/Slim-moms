@@ -1,3 +1,5 @@
+import { DaySummary, EatenProduct } from "./Dairy";
+
 export type UserDairyData = {
   weight: number;
   height: number;
@@ -18,7 +20,7 @@ export type UserLoginResponse = {
   email: string;
   username: string;
   id: string;
-  userData: UserDairyData | null;
+  userData: UserDairyData;
 };
 
 export type UserTodaySummary = {
@@ -31,44 +33,14 @@ export type UserTodaySummary = {
   id: string;
 };
 
-export type GetUserInfoResponse = {
-  email: string;
-  username: string;
-  id: string;
-  userData: {
-    weight: number;
-    height: number;
-    age: number;
-    bloodType: number;
-    desiredWeight: number;
-    dailyRate: number;
-    notAllowedProducts: string[];
-  };
+export type GetUserInfoResponse = UserLoginResponse & {
   days: [
     {
       _id: string;
-      eatenProducts: [
-        {
-          title: string;
-          weight: number;
-          kcal: number;
-          id: string;
-        },
-      ];
+      eatenProducts: EatenProduct[];
       date: string;
       __v: number;
-      // -------------------------
-      daySummary: {
-        date: string;
-        kcalLeft: number;
-        kcalConsumed: number;
-        dailyRate: number;
-        percentsOfDailyRate: number;
-        userId: string;
-        _id: string;
-        __v: number;
-      };
-      // --------------------------------------
+      daySummary: DaySummary;
     },
   ];
 };

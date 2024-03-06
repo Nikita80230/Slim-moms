@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 
-import { login } from "@/redux/auth/operations";
+import { login } from "@/redux/user/operations";
 
 import { useAppDispatch } from "@/hooks/hooks";
 
@@ -36,6 +36,8 @@ const LoginForm = () => {
           labelText="email"
           value={formik.values.email}
           onChange={formik.handleChange}
+          error={formik.errors.email}
+          touched={formik.touched.email}
         />
         <InputGroup
           required
@@ -44,6 +46,8 @@ const LoginForm = () => {
           labelText="password"
           value={formik.values.password}
           onChange={formik.handleChange}
+          error={formik.errors.password}
+          touched={formik.touched.password}
         />
         <StyledBtnWrapper>
           <button className="login" type="submit">

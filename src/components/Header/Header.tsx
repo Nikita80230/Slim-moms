@@ -2,14 +2,17 @@
 import { useMediaQuery } from "react-responsive";
 import { Link, NavLink } from "react-router-dom";
 
+import { selectIsLoggedIn } from "@/redux/user/userSlice";
+
+import { useAppSelector } from "@/hooks/hooks";
+
 import logo from "@/assets/images/logoHeader.png";
 import mobileLogo from "@/assets/images/MobileLogo.png";
 import tabletLogo from "@/assets/images/tabletLogo.png";
 import { Container, UserMenu, UserMenuPanel } from "@/components";
+import { RoutePath } from "@/routes/routes";
 
 import { StyledHeader } from "./Styled";
-
-import { RoutePath } from "@/routes/routes";
 
 type CurrentScreen = "desktop" | "tablet" | "mobile";
 
@@ -20,7 +23,7 @@ const logoByScreen: Record<CurrentScreen, string> = {
 };
 
 const Header = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   let currentScreen: CurrentScreen = "desktop";
 

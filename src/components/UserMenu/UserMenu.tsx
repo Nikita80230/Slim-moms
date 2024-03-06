@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
 import CloseModalMenuIcon from "@/assets/images/closeModalImg.svg?react";
 import MobileBurgerMenuIcon from "@/assets/images/mobileBurgerMenuIcon.svg?react";
-import ModalNavMenu from "@/components/ModalNavMenu/ModalNavMenu";
+import { ModalNavMenu, UserMenuPanel } from "@/components";
 
 import { StyledUserMenu } from "./Styled";
-import { UserMenuPanel } from "..";
-import { useMediaQuery } from "react-responsive";
 
 const UserMenu = () => {
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);

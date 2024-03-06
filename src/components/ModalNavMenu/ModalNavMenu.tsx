@@ -2,9 +2,9 @@
 import { createPortal } from "react-dom";
 import { NavLink } from "react-router-dom";
 
-import { StyledModalNavMenu } from "./Styled";
-
 import { RoutePath } from "@/routes/routes";
+
+import { StyledModalNavMenu } from "./Styled";
 
 // type Props = {
 //   closeModal: ()=> void;

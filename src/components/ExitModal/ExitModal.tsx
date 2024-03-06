@@ -1,9 +1,9 @@
 import { FC } from "react";
-
-import { StyledExitModal } from "./Styled";
+import { createPortal } from "react-dom";
 
 import CloseModalIcon from "@/assets/images/closeModalImg.svg?react";
-import { createPortal } from "react-dom";
+
+import { StyledExitModal } from "./Styled";
 
 type Props = {
   onCancel: () => void;

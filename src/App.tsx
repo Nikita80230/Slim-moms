@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import {
@@ -8,36 +9,61 @@ import {
   MobileAddProductPage,
   RegisterPage,
 } from "@/pages";
-
 import { RoutePath } from "@/routes/routes";
+
+import { ProtectedRoute, RestrictedRoute } from "./components";
 import { useAppDispatch } from "./hooks/hooks";
-import { useEffect } from "react";
-import { refresh } from "./redux/auth/operations";
+import { refresh } from "./redux/user/operations";
 
 export const appRoutes = [
   {
     path: RoutePath.MAIN,
-    element: <MainPage />,
+    element: (
+      <RestrictedRoute>
+        <MainPage />
+      </RestrictedRoute>
+    ),
   },
   {
     path: RoutePath.REGISTER,
-    element: <RegisterPage />,
+
+    element: (
+      <RestrictedRoute>
+        <RegisterPage />
+      </RestrictedRoute>
+    ),
   },
   {
     path: RoutePath.LOGIN,
-    element: <LoginPage />,
+    element: (
+      <RestrictedRoute>
+        <LoginPage />
+      </RestrictedRoute>
+    ),
   },
   {
     path: RoutePath.DIARY,
-    element: <DiaryPage />,
+    element: (
+      <ProtectedRoute>
+        <DiaryPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: RoutePath.CALCULATOR,
-    element: <CalculatorPage />,
+    element: (
+      <ProtectedRoute>
+        <CalculatorPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: RoutePath.MOBILE_ADD_PRODUCT_PAGE,
-    element: <MobileAddProductPage />,
+    element: (
+      <ProtectedRoute>
+        <MobileAddProductPage />
+      </ProtectedRoute>
+    ),
   },
 ];
 

@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 
 import closeModalImg from "@/assets/images/closeModalImg.svg";
 import IconMobileCloseBtnSvg from "@/assets/images/mobileCloseBtnSvg.svg?react";
+import { RoutePath } from "@/routes/routes";
 
 import { StyledModal } from "./Styled";
-
-import { RoutePath } from "@/routes/routes";
 
 type Props = {
   closeModal: () => void;

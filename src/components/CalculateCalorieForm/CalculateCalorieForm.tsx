@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
 
-import { getNotAllowProductList } from "@/redux/auth/operations";
+import { getNotAllowProductList } from "@/redux/user/operations";
 
 import { useAppDispatch } from "@/hooks/hooks";
 
@@ -10,10 +10,7 @@ import { InputGroup, Modal } from "@/components";
 
 import { StyledCalculateCalorieForm } from "./Styled";
 
-import {
-  CalculateCaloriesFormDataResponse,
-  UserCalculateCaloriesFormData,
-} from "@/types/Dairy";
+import { CalculateCaloriesFormData } from "@/types/Dairy";
 
 const personSchema = yup.object({
   height: yup.string().required().min(3).max(3),
@@ -27,7 +24,7 @@ const CalculateCalorieForm = () => {
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const formik = useFormik<UserCalculateCaloriesFormData>({
+  const formik = useFormik<CalculateCaloriesFormData<string>>({
     initialValues: {
       height: "",
       age: "",
@@ -37,12 +34,12 @@ const CalculateCalorieForm = () => {
     },
     validationSchema: personSchema,
     onSubmit: (values) => {
-      const userCalculateCaloriesFormData: CalculateCaloriesFormDataResponse = {
-        weight: +values.weight,
-        height: +values.height,
-        age: +values.age,
-        desiredWeight: +values.desiredWeight,
-        bloodType: +values.bloodType,
+      const userCalculateCaloriesFormData: CalculateCaloriesFormData = {
+        weight: Number(values.weight),
+        height: Number(values.height),
+        age: Number(values.age),
+        desiredWeight: Number(values.desiredWeight),
+        bloodType: Number(values.bloodType),
       };
 
       dispatch(getNotAllowProductList(userCalculateCaloriesFormData));
@@ -68,6 +65,8 @@ const CalculateCalorieForm = () => {
             <InputGroup
               onChange={formik.handleChange}
               value={formik.values.height}
+              error={formik.errors.height}
+              touched={formik.touched.height}
               required
               name={"height"}
               labelText="height"
@@ -75,6 +74,8 @@ const CalculateCalorieForm = () => {
             <InputGroup
               onChange={formik.handleChange}
               value={formik.values.age}
+              error={formik.errors.age}
+              touched={formik.touched.age}
               required
               name={"age"}
               labelText="age"
@@ -82,6 +83,8 @@ const CalculateCalorieForm = () => {
             <InputGroup
               onChange={formik.handleChange}
               value={formik.values.weight}
+              error={formik.errors.weight}
+              touched={formik.touched.weight}
               required
               name={"weight"}
               labelText="current weight"
@@ -91,6 +94,8 @@ const CalculateCalorieForm = () => {
             <InputGroup
               onChange={formik.handleChange}
               value={formik.values.desiredWeight}
+              error={formik.errors.desiredWeight}
+              touched={formik.touched.desiredWeight}
               required
               className="desiredWeight"
               name={"desiredWeight"}

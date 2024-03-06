@@ -4,12 +4,12 @@ import { toast } from "react-toastify";
 
 import { RootState } from "../store";
 
+import { CalculateCaloriesFormData } from "@/types/Dairy";
 import {
   GetUserInfoResponse,
   UserAuthFormData,
   UserLoginResponse,
 } from "@/types/User";
-import { CalculateCaloriesFormDataResponse } from "@/types/Dairy";
 
 type RefreshResponse = {
   newAccessToken: string;
@@ -60,18 +60,17 @@ export const refresh = createAsyncThunk(
   "auth/refresh",
   async (_, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
-    const sid = state.auth.sid;
+    const oldSid = state.auth.sid;
     const refreshToken = state.auth.refreshToken as string;
 
     setToken(refreshToken);
 
     try {
       const response = await instance.post<RefreshResponse>("/auth/refresh", {
-        sid,
+        sid: oldSid,
       });
 
-      const newSid = response.data.sid; // ця змінна створена через те що з бекенду sid приходить з точно такою ж назвою
-      const { newRefreshToken, newAccessToken } = response.data;
+      const { newRefreshToken, newAccessToken, sid } = response.data;
       setToken(newAccessToken);
 
       const userDataResponse = await instance.get<GetUserInfoResponse>("/user");
@@ -83,7 +82,7 @@ export const refresh = createAsyncThunk(
         userData: userDataResponse.data.userData,
       };
 
-      return { userData, newSid, newRefreshToken };
+      return { userData, sid, newRefreshToken };
     } catch (error) {
       toast.error("Uppss something went wrong, re-log in fault");
       return rejectWithValue(error);
@@ -103,7 +102,7 @@ export const refresh = createAsyncThunk(
 export const getNotAllowProductList = createAsyncThunk(
   "dairy/getNotAllowProductList",
   async (
-    userCalculateCaloriesFormData: CalculateCaloriesFormDataResponse,
+    userCalculateCaloriesFormData: CalculateCaloriesFormData,
     thunkApi
   ) => {
     try {

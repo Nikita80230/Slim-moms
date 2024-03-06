@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { login, refresh } from "./operations";
+import { RootState } from "../store";
 
+import { DaySummary } from "@/types/Dairy";
 import {
-  GetUserInfoResponse,
+  // GetUserInfoResponse,
   UserLoginResponse,
   UserTodaySummary,
 } from "@/types/User";
@@ -15,7 +17,8 @@ type InitialAuthState = {
   accessToken: null | string;
   refreshToken: null | string;
   sid: null | string;
-  todaySummary: UserTodaySummary | null | object;
+  date: Date;
+  todaySummary: DaySummary | null | object;
   user: UserLoginResponse | null;
 };
 
@@ -26,29 +29,19 @@ const initialAuthState: InitialAuthState = {
   accessToken: null,
   refreshToken: null,
   sid: null,
+  date: new Date(),
   todaySummary: null,
   user: null,
 };
 
-// {
-//     email: "",
-//     username: "",
-//     id: "",
-//     userData: {
-//       weight: 0,
-//       height: 0,
-//       age: 0,
-//       bloodType: 0,
-//       desiredWeight: 0,
-//       dailyRate: 0,
-//       notAllowedProducts: [],
-//     },
-//   },
-
 const authSlice = createSlice({
   name: "auth",
   initialState: initialAuthState,
-  reducers: {},
+  reducers: {
+    setDairyDate: (state, action: PayloadAction<Date>) => {
+      state.date = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -67,6 +60,7 @@ const authSlice = createSlice({
           }>
         ) => {
           state.isLoading = false;
+          state.isLoggedIn = true;
           state.user = action.payload.user;
           state.accessToken = action.payload.accessToken;
           state.refreshToken = action.payload.refreshToken;
@@ -86,13 +80,14 @@ const authSlice = createSlice({
           state,
           action: PayloadAction<{
             newRefreshToken: string;
-            newSid: string;
+            sid: string;
             userData: UserLoginResponse;
           }>
         ) => {
           state.isLoading = false;
+          state.isLoggedIn = true;
           state.refreshToken = action.payload.newRefreshToken;
-          state.sid = action.payload.newSid;
+          state.sid = action.payload.sid;
           // if (state.user !== null) {
           state.user = action.payload.userData;
           // }
@@ -104,4 +99,9 @@ const authSlice = createSlice({
   },
 });
 
+export const selectUser = (state: RootState) => state.auth.user;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectDate = (state: RootState) => state.auth.date;
+
+export const { setDairyDate } = authSlice.actions;
 export const authReducer = authSlice.reducer;
