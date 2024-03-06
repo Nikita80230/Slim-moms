@@ -140,13 +140,6 @@ const CalculateCalorieForm = () => {
         <button className="calculateCalorieFormButton" type="submit">
           Start losing weight
         </button>
-        <button
-          className="calculateCalorieFormButton"
-          type="button"
-          // onClick={handleOpenModal}
-        >
-          test modal
-        </button>
       </form>
       {isModalOpen && <Modal closeModal={handleCancel} isOpen={isModalOpen} />}
     </StyledCalculateCalorieForm>
