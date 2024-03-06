@@ -1,14 +1,16 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
+import { ChangeEvent, useEffect, useState } from "react";
 import * as yup from "yup";
+
+import { selectDate } from "@/redux/user/userSlice";
+
+import { useAppSelector } from "@/hooks/hooks";
 
 import addProductBtnImg from "@/assets/images/addProductBtnImg.png";
 import { InputGroup } from "@/components";
 
 import { StyledAddNewProductForm } from "./Styled";
-import { useAppSelector } from "@/hooks/hooks";
-import { selectDate } from "@/redux/user/userSlice";
-import { ChangeEvent, useEffect, useState } from "react";
 
 const productSchema = yup.object({
   id: yup.string(),
