@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { login, refresh } from "./operations";
+import { getUserDailyRate, login, refresh } from "./operations";
 import { RootState } from "../store";
 
-import { DaySummary } from "@/types/Dairy";
+import { DaySummary, LoggedInUserDailyRate } from "@/types/Dairy";
 import {
   // GetUserInfoResponse,
   UserLoginResponse,
@@ -14,31 +14,34 @@ import {
 type InitialAuthState = {
   isLoading: boolean;
   isLoggedIn: boolean;
+  isRefreshing: boolean;
   accessToken: null | string;
   refreshToken: null | string;
   sid: null | string;
-  date: Date;
-  todaySummary: DaySummary | null | object;
+  date: string;
+  daySummary: DaySummary | null;
   user: UserLoginResponse | null;
+  days: Day[] | [];
 };
 
 const initialAuthState: InitialAuthState = {
   isLoading: false,
   isLoggedIn: false,
-
+  isRefreshing: false,
   accessToken: null,
   refreshToken: null,
   sid: null,
-  date: new Date(),
-  todaySummary: null,
+  date: new Date().toISOString(),
+  daySummary: null,
   user: null,
+  days: [],
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState: initialAuthState,
   reducers: {
-    setDairyDate: (state, action: PayloadAction<Date>) => {
+    setDairyDate: (state, action: PayloadAction<string>) => {
       state.date = action.payload;
     },
   },
@@ -56,7 +59,7 @@ const authSlice = createSlice({
             accessToken: string;
             refreshToken: string;
             sid: string;
-            todaySummary: UserTodaySummary | object;
+            todaySummary: DaySummary;
           }>
         ) => {
           state.isLoading = false;
@@ -65,7 +68,7 @@ const authSlice = createSlice({
           state.accessToken = action.payload.accessToken;
           state.refreshToken = action.payload.refreshToken;
           state.sid = action.payload.sid;
-          state.todaySummary = action.payload.todaySummary;
+          state.daySummary = action.payload.todaySummary;
         }
       )
       .addCase(login.rejected, (state) => {
@@ -73,6 +76,7 @@ const authSlice = createSlice({
       })
       .addCase(refresh.pending, (state) => {
         state.isLoading = true;
+        state.isRefreshing = true;
       })
       .addCase(
         refresh.fulfilled,
@@ -82,18 +86,40 @@ const authSlice = createSlice({
             newRefreshToken: string;
             sid: string;
             userData: UserLoginResponse;
+            days: Day[];
           }>
         ) => {
+          state.isRefreshing = false;
           state.isLoading = false;
           state.isLoggedIn = true;
           state.refreshToken = action.payload.newRefreshToken;
           state.sid = action.payload.sid;
           // if (state.user !== null) {
           state.user = action.payload.userData;
+          state.days = action.payload.days;
           // }
         }
       )
       .addCase(refresh.rejected, (state) => {
+        state.isLoading = false;
+        state.isRefreshing = false;
+      })
+      .addCase(getUserDailyRate.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getUserDailyRate.fulfilled,
+        (state, action: PayloadAction<LoggedInUserDailyRate>) => {
+          state.isLoading = false;
+          state.daySummary = action.payload.summary;
+          if (state.user !== null) {
+            state.user.userData.dailyRate = action.payload.dailyRate;
+            state.user.userData.notAllowedProducts =
+              action.payload.notAllowedProducts;
+          }
+        }
+      )
+      .addCase(getUserDailyRate.rejected, (state) => {
         state.isLoading = false;
       });
   },

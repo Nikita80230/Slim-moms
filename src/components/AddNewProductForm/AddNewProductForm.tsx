@@ -1,11 +1,12 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
-import { ChangeEvent, useEffect, useState } from "react";
+import AsyncSelect from "react-select/async";
 import * as yup from "yup";
 
+import { addProduct, getProductListByQuery } from "@/redux/user/operations";
 import { selectDate } from "@/redux/user/userSlice";
 
-import { useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 
 import addProductBtnImg from "@/assets/images/addProductBtnImg.png";
 import { InputGroup } from "@/components";
@@ -20,14 +21,23 @@ const productSchema = yup.object({
 
 const AddNewProductForm = () => {
   const date = useAppSelector(selectDate);
+  const dispatch = useAppDispatch();
 
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
+  const loadOptions = (
+    inputValue: string,
+    callback: (options: { value: string; label: string; id: string }[]) => void
+  ) => {
+    dispatch(getProductListByQuery(inputValue))
+      .unwrap()
+      .then((data) => {
+        console.log("data from component-->", data);
+        const formattedData = data.map(({ _id, title: { en } }) => {
+          return { value: en, label: en, id: _id };
+        });
+        console.log(formattedData);
+        callback(formattedData);
+      });
   };
-
-  useEffect(() => {}, [searchQuery]);
 
   const formik = useFormik({
     initialValues: {
@@ -38,25 +48,35 @@ const AddNewProductForm = () => {
     onSubmit: (values) => {
       const addNewProductFormData = {
         weight: Number(values.weight),
-        date: date,
-        id: nanoid(),
+        date: date.slice(0, 10),
+        productId: values.id,
       };
       console.log("addNewProductFormData --> ", addNewProductFormData);
-      // dispatch(getNotAllowProductList(userCalculateCaloriesFormData));
-      // setIsModalOpen(true);
+      dispatch(addProduct(addNewProductFormData));
     },
   });
 
   return (
     <StyledAddNewProductForm onSubmit={formik.handleSubmit}>
       <div className="inputsWrapper">
-        <InputGroup
+        <AsyncSelect
+          className="basic-single productName"
+          classNamePrefix="select"
+          name="color"
+          loadOptions={loadOptions}
+          onChange={(item) => {
+            // console.log(item);
+            formik.setFieldValue("id", item?.id);
+          }}
+          placeholder={<div>Enter product name</div>}
+        />
+        {/* <InputGroup
           onChange={handleSearchQuery}
           value={searchQuery}
           className="productName"
           name="productName"
           labelText="Enter product name"
-        />
+        /> */}
         <InputGroup
           onChange={formik.handleChange}
           value={formik.values.weight}

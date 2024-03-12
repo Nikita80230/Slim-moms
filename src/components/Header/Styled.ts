@@ -60,10 +60,19 @@ export const StyledHeader = styled.header`
     text-decoration: none;
   }
 
+  /* ===================================================max-width: 960px===================================================== */
+
+  @media (max-width: 960px) {
+    z-index: 3;
+    background: white;
+    padding-bottom: 20px;
+  }
+
   /* ===================================================max-width: 768px===================================================== */
 
   @media (max-width: 768px) {
-    /* margin-bottom: 75px; */
+    padding-bottom: 0;
+
     .headerOuter {
       position: relative;
     }

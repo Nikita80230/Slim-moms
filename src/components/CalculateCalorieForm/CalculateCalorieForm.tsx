@@ -2,9 +2,13 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
 
-import { getNotAllowProductList } from "@/redux/user/operations";
+import {
+  getNotAllowProductList,
+  getUserDailyRate,
+} from "@/redux/user/operations";
+import { selectIsLoggedIn } from "@/redux/user/userSlice";
 
-import { useAppDispatch } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 
 import { InputGroup, Modal } from "@/components";
 
@@ -23,6 +27,7 @@ const personSchema = yup.object({
 const CalculateCalorieForm = () => {
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const formik = useFormik<CalculateCaloriesFormData<string>>({
     initialValues: {
@@ -41,9 +46,12 @@ const CalculateCalorieForm = () => {
         desiredWeight: Number(values.desiredWeight),
         bloodType: Number(values.bloodType),
       };
-
-      dispatch(getNotAllowProductList(userCalculateCaloriesFormData));
-      setIsModalOpen(true);
+      if (isLoggedIn) {
+        dispatch(getUserDailyRate(userCalculateCaloriesFormData));
+      } else {
+        dispatch(getNotAllowProductList(userCalculateCaloriesFormData));
+        setIsModalOpen(true);
+      }
     },
   });
 

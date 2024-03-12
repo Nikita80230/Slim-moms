@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 
 import addProductBtnImg from "@/assets/images/addProductBtnImg.png";
+import { RoutePath } from "@/routes/routes";
 
 import { StyledAddNewProductMobileBtn } from "./Style";
-
-import { RoutePath } from "@/routes/routes";
 
 const AddNewProductMobileBtn = () => {
   return (

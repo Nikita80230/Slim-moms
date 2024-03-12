@@ -35,6 +35,38 @@ export const StyledAddNewProductForm = styled.form`
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   }
 
+  /* =============selector-styles=============== */
+
+  .select__indicator,
+  .select__indicator-separator {
+    display: none;
+  }
+
+  .select__input-container,
+  .select__single-value,
+  .select__placeholder {
+    color: #9b9faa;
+  }
+  .select__control {
+    border-color: #e0e0e0b5;
+    border-radius: unset;
+    border-style: unset;
+    border-bottom-style: solid;
+    border-width: 1px;
+    transition: all 0.3s;
+
+    min-height: 28px;
+
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: #9b9faa;
+    background-color: transparent;
+  }
+  .select__control:hover {
+    border-color: #fc842d;
+  }
+
   @media (max-width: 564px) {
     display: none;
   }

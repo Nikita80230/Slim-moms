@@ -120,7 +120,7 @@ export const StyledInputGroup = styled.label<{ $disabled?: boolean }>`
   }
 
   .input {
-    padding-bottom: 6px;
+    padding-bottom: 10px;
 
     outline: none;
     border: none;
@@ -141,7 +141,7 @@ export const StyledInputGroup = styled.label<{ $disabled?: boolean }>`
     }
 
     &:not(:placeholder-shown) + .placeholder {
-      transform: translateY(-20px);
+      transform: translateY(-28px);
       color: #fc842d;
       font-weight: 500;
       font-size: 12px;

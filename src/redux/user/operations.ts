@@ -4,7 +4,13 @@ import { toast } from "react-toastify";
 
 import { RootState } from "../store";
 
-import { CalculateCaloriesFormData } from "@/types/Dairy";
+import {
+  AddProductResponse,
+  CalculateCaloriesFormData,
+  DaySummary,
+  LoggedInUserDailyRate,
+  Product,
+} from "@/types/Dairy";
 import {
   GetUserInfoResponse,
   UserAuthFormData,
@@ -82,7 +88,11 @@ export const refresh = createAsyncThunk(
         userData: userDataResponse.data.userData,
       };
 
-      return { userData, sid, newRefreshToken };
+      const {
+        data: { days },
+      } = userDataResponse;
+      // console.log(days);
+      return { userData, sid, newRefreshToken, days };
     } catch (error) {
       toast.error("Uppss something went wrong, re-log in fault");
       return rejectWithValue(error);
@@ -91,16 +101,17 @@ export const refresh = createAsyncThunk(
   {
     condition: (_, { getState }) => {
       const state = getState() as RootState;
+      const isRefreshing = state.auth.isRefreshing;
       const sid = state.auth.sid;
 
-      if (!sid) return false;
+      if (!sid || isRefreshing) return false;
       return true;
     },
   }
 );
 
 export const getNotAllowProductList = createAsyncThunk(
-  "dairy/getNotAllowProductList",
+  "auth/getNotAllowProductList",
   async (
     userCalculateCaloriesFormData: CalculateCaloriesFormData,
     thunkApi
@@ -111,9 +122,70 @@ export const getNotAllowProductList = createAsyncThunk(
         userCalculateCaloriesFormData
       );
 
-      console.log(response.data);
+      console.log("getNotAllowProductList-->", response.data);
     } catch (error) {
       thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+export const getUserDailyRate = createAsyncThunk(
+  "auth/getNotAllowProductList",
+  async (
+    userCalculateCaloriesFormData: CalculateCaloriesFormData,
+    { getState, rejectWithValue }
+  ) => {
+    const state = getState() as RootState;
+    const userId = state.auth.user?.id;
+    try {
+      const { data } = await instance.post<LoggedInUserDailyRate>(
+        `/daily-rate/${userId}`,
+        userCalculateCaloriesFormData
+      );
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getProductListByQuery = createAsyncThunk(
+  "auth/getProductListByQuery",
+  async (searchQuery: string, thunkApi) => {
+    try {
+      const { data } = await instance.get<Product[]>(
+        `/product?search=${searchQuery}`
+      );
+      console.log(data);
+      return data;
+    } catch (error) {
+      toast.error("Please, count your daily rate first");
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+export const addProduct = createAsyncThunk(
+  "auth/addProduct",
+  async (
+    formData: {
+      date: string;
+      productId: string;
+      weight: number;
+    },
+    thunkApi
+  ) => {
+    try {
+      const { data } = await instance.post<AddProductResponse>(
+        "/day",
+        formData
+      );
+      console.log("auth/addProduct-->", data.daySummary);
+      return data;
+    } catch (error) {
+      toast.error("Upss, smth go wrong, product wasn't added");
+      return thunkApi.rejectWithValue(error);
     }
   }
 );
