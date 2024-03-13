@@ -1,4 +1,4 @@
-import { DaySummary, EatenProduct } from "./Dairy";
+// import { DaySummary, EatenProduct } from "./Dairy";
 
 export type UserDairyData = {
   weight: number;
