@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { RootState } from "../store";
 
 import {
+  AddFirstProductResponse,
   AddProductResponse,
   CalculateCaloriesFormData,
   LoggedInUserDailyRate,
@@ -49,11 +50,12 @@ export const login = createAsyncThunk(
   "auth/login",
   async (loginFormData: UserAuthFormData, thunkApi) => {
     try {
-      const response = await instance.post("/auth/login", loginFormData);
+      const { data } = await instance.post("/auth/login", loginFormData);
       toast.success("You was successfully logged in, please login!!!");
-      console.log("login ", response.data);
+      console.log("login ", data);
+      setToken(data.accessToken);
 
-      return response.data;
+      return data;
     } catch (error: any) {
       toast.error("Upsss, some error occurred, please try again later");
       return thunkApi.rejectWithValue(error.message);
@@ -78,18 +80,17 @@ export const refresh = createAsyncThunk(
       const { newRefreshToken, newAccessToken, sid } = response.data;
       setToken(newAccessToken);
 
-      const userDataResponse = await instance.get<GetUserInfoResponse>("/user");
+      const {
+        data: { email, userData: user, username, id, days },
+      } = await instance.get<GetUserInfoResponse>("/user");
 
       const userData: UserLoginResponse = {
-        email: userDataResponse.data.email,
-        username: userDataResponse.data.username,
-        id: userDataResponse.data.id,
-        userData: userDataResponse.data.userData,
+        email,
+        username,
+        id,
+        userData: user,
       };
 
-      const {
-        data: { days },
-      } = userDataResponse;
       // console.log(days);
       return { userData, sid, newRefreshToken, days };
     } catch (error) {
@@ -176,11 +177,10 @@ export const addProduct = createAsyncThunk(
     thunkApi
   ) => {
     try {
-      const { data } = await instance.post<AddProductResponse>(
-        "/day",
-        formData
-      );
-      console.log("auth/addProduct-->", data.daySummary);
+      const { data } = await instance.post<
+        AddProductResponse | AddFirstProductResponse
+      >("/day", formData);
+      // console.log("auth/addProduct-->", data.daySummary);
       return data;
     } catch (error) {
       toast.error("Upss, smth go wrong, product wasn't added");

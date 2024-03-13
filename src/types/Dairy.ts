@@ -67,48 +67,52 @@ export type AddProductResponse = {
   daySummary: DaySummary;
 };
 
-export type Day = {
+export type AddFirstProductResponse = {
+  eatenProduct: EatenProduct;
+  newDay: {
+    id: string;
+    eatenProducts: EatenProduct[];
+    date: string;
+    daySummary: string;
+  };
+  newSummary: DaySummary;
+};
+
+export type TDay = {
   _id: string;
   eatenProducts: EatenProduct[];
   date: string;
   __v: number;
   daySummary: DaySummary;
 };
-// {
-//             _id: string;
-//             eatenProducts: EatenProduct[];
-//             date: string;
-//             __v: number;
-//             daySummary: DaySummary;
-//         }
 
-// {
-//     "eatenProduct": {
-//         "title": "Жир курячий",
-//         "weight": 1111,
-//         "kcal": 9965.67,
-//         "id": "2c7a0979-4fc7-48bb-9a39-3d0a9d51e3e7"
-//     },
-//     "newDay": {
-//         "id": "65f06e1fc386083f6a81236f",
+// export type FormattedDay = {};
+
+// "day": {
+//         "id": "65f16e61c386083f6a812409",
 //         "eatenProducts": [
 //             {
-//                 "title": "Жир курячий",
+//                 "title": "Жир кістковий топлений",
 //                 "weight": 1111,
 //                 "kcal": 9965.67,
-//                 "id": "2c7a0979-4fc7-48bb-9a39-3d0a9d51e3e7"
+//                 "id": "e0508dc4-e199-4605-8b39-9f915056e892"
+//             },
+//             {
+//                 "title": "Гречана крупа (ядриця) зелена",
+//                 "weight": 111,
+//                 "kcal": 328.56,
+//                 "id": "46cd186d-db66-4e99-9f01-6580971bd698"
 //             }
 //         ],
-//         "date": "2024-03-12",
-//         "daySummary": "65f06e1fc386083f6a81236e"
+//         "date": "2024-03-13",
+//         "daySummary": "65f16e61c386083f6a812408"
 //     },
-//     "newSummary": {
-//         "date": "2024-03-12",
+//     "daySummary": {
+//         "date": "2024-03-13",
 //         "kcalLeft": 0,
-//         "kcalConsumed": 9965.67,
-//         "dailyRate": 2226.5,
+//         "kcalConsumed": 10294.23,
+//         "dailyRate": 3336.5,
 //         "percentsOfDailyRate": 100,
-//         "userId": "65df5e4cc386083f6a811f50",
-//         "id": "65f06e1fc386083f6a81236e"
+//         "userId": "65f16c74c386083f6a812403",
+//         "id": "65f16e61c386083f6a812408"
 //     }
-// }

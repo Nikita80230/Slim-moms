@@ -1,14 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { getUserDailyRate, login, refresh } from "./operations";
+import { isFirstProductResponse } from "@/utils/productTypeGuard";
+
+import { addProduct, getUserDailyRate, login, refresh } from "./operations";
 import { RootState } from "../store";
 
-import { DaySummary, LoggedInUserDailyRate } from "@/types/Dairy";
 import {
-  // GetUserInfoResponse,
-  UserLoginResponse,
-  // UserTodaySummary,
-} from "@/types/User";
+  AddFirstProductResponse,
+  AddProductResponse,
+  DaySummary,
+  LoggedInUserDailyRate,
+  TDay,
+} from "@/types/Dairy";
+import { UserLoginResponse } from "@/types/User";
 
 type InitialAuthState = {
   isLoading: boolean;
@@ -20,7 +24,7 @@ type InitialAuthState = {
   date: string;
   daySummary: DaySummary | null;
   user: UserLoginResponse | null;
-  days: Day[] | [];
+  days: TDay[];
 };
 
 const initialAuthState: InitialAuthState = {
@@ -85,7 +89,7 @@ const authSlice = createSlice({
             newRefreshToken: string;
             sid: string;
             userData: UserLoginResponse;
-            days: Day[];
+            days: TDay[];
           }>
         ) => {
           state.isRefreshing = false;
@@ -93,10 +97,8 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
           state.refreshToken = action.payload.newRefreshToken;
           state.sid = action.payload.sid;
-          // if (state.user !== null) {
           state.user = action.payload.userData;
           state.days = action.payload.days;
-          // }
         }
       )
       .addCase(refresh.rejected, (state) => {
@@ -119,6 +121,24 @@ const authSlice = createSlice({
         }
       )
       .addCase(getUserDailyRate.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(addProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        addProduct.fulfilled,
+        (
+          state,
+          action: PayloadAction<AddFirstProductResponse | AddProductResponse>
+        ) => {
+          state.isLoading = false;
+          if (isFirstProductResponse(action.payload)) {
+          } else {
+          }
+        }
+      )
+      .addCase(addProduct.rejected, (state) => {
         state.isLoading = false;
       });
   },
