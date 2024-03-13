@@ -1,6 +1,7 @@
 // import { DaySummary, EatenProduct } from "./Dairy";
 
-import { TDay } from "./Dairy";
+// import { TDay } from "./Dairy";
+import { GetUserInfoDayResponse } from "./ResponseTypes";
 
 export type UserDairyData = {
   weight: number;
@@ -35,4 +36,6 @@ export type UserTodaySummary = {
   id: string;
 };
 
-export type GetUserInfoResponse = UserLoginResponse & { days: TDay[] };
+export type GetUserInfoResponse = UserLoginResponse & {
+  days: GetUserInfoDayResponse[];
+};

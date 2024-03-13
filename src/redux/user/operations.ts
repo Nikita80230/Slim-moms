@@ -2,15 +2,20 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+import { mapData } from "@/utils/mapData";
+
 import { RootState } from "../store";
 
 import {
-  AddFirstProductResponse,
-  AddProductResponse,
   CalculateCaloriesFormData,
   LoggedInUserDailyRate,
   Product,
 } from "@/types/Dairy";
+import {
+  AddFirstProductResponse,
+  AddProductResponse,
+  // GetUserInfoDayResponse,
+} from "@/types/ResponseTypes";
 import {
   GetUserInfoResponse,
   UserAuthFormData,
@@ -37,7 +42,7 @@ export const registration = createAsyncThunk(
     try {
       const response = await instance.post("/auth/register", registerFormData);
       toast.success("You was successfully registered, please login!!!");
-      console.log("response ", response.data);
+      // console.log("response ", response.data);
       return response.data;
     } catch (error: any) {
       toast.error("Upsss, some error occurred, please try again later");
@@ -52,10 +57,21 @@ export const login = createAsyncThunk(
     try {
       const { data } = await instance.post("/auth/login", loginFormData);
       toast.success("You was successfully logged in, please login!!!");
-      console.log("login ", data);
-      setToken(data.accessToken);
+      const { refreshToken, accessToken, sid } = data;
+      setToken(accessToken);
 
-      return data;
+      const {
+        data: { email, userData: user, username, id, days },
+      } = await instance.get<GetUserInfoResponse>("/user");
+
+      const userData: UserLoginResponse = {
+        email,
+        username,
+        id,
+        userData: user,
+      };
+
+      return { userData, sid, refreshToken, days: mapData(days) };
     } catch (error: any) {
       toast.error("Upsss, some error occurred, please try again later");
       return thunkApi.rejectWithValue(error.message);
@@ -92,7 +108,12 @@ export const refresh = createAsyncThunk(
       };
 
       // console.log(days);
-      return { userData, sid, newRefreshToken, days };
+      return {
+        userData,
+        sid,
+        newRefreshToken,
+        days: mapData(days),
+      };
     } catch (error) {
       toast.error("Uppss something went wrong, re-log in fault");
       return rejectWithValue(error);
@@ -180,7 +201,7 @@ export const addProduct = createAsyncThunk(
       const { data } = await instance.post<
         AddProductResponse | AddFirstProductResponse
       >("/day", formData);
-      // console.log("auth/addProduct-->", data.daySummary);
+      // console.log("auth/addProduct-->", data);
       return data;
     } catch (error) {
       toast.error("Upss, smth go wrong, product wasn't added");

@@ -1,4 +1,7 @@
-import { AddFirstProductResponse, AddProductResponse } from "@/types/Dairy";
+import {
+  AddFirstProductResponse,
+  AddProductResponse,
+} from "@/types/ResponseTypes";
 
 export function isFirstProductResponse(
   responseData: AddFirstProductResponse | AddProductResponse

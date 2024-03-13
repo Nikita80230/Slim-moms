@@ -5,13 +5,11 @@ import { isFirstProductResponse } from "@/utils/productTypeGuard";
 import { addProduct, getUserDailyRate, login, refresh } from "./operations";
 import { RootState } from "../store";
 
+import { DaySummary, FormattedDay, LoggedInUserDailyRate } from "@/types/Dairy";
 import {
   AddFirstProductResponse,
   AddProductResponse,
-  DaySummary,
-  LoggedInUserDailyRate,
-  TDay,
-} from "@/types/Dairy";
+} from "@/types/ResponseTypes";
 import { UserLoginResponse } from "@/types/User";
 
 type InitialAuthState = {
@@ -24,7 +22,7 @@ type InitialAuthState = {
   date: string;
   daySummary: DaySummary | null;
   user: UserLoginResponse | null;
-  days: TDay[];
+  days: FormattedDay[];
 };
 
 const initialAuthState: InitialAuthState = {
@@ -58,20 +56,19 @@ const authSlice = createSlice({
         (
           state,
           action: PayloadAction<{
-            user: UserLoginResponse;
-            accessToken: string;
             refreshToken: string;
             sid: string;
-            todaySummary: DaySummary;
+            userData: UserLoginResponse;
+            days: FormattedDay[];
           }>
         ) => {
+          state.isRefreshing = false;
           state.isLoading = false;
           state.isLoggedIn = true;
-          state.user = action.payload.user;
-          state.accessToken = action.payload.accessToken;
           state.refreshToken = action.payload.refreshToken;
           state.sid = action.payload.sid;
-          state.daySummary = action.payload.todaySummary;
+          state.user = action.payload.userData;
+          state.days = action.payload.days;
         }
       )
       .addCase(login.rejected, (state) => {
@@ -89,7 +86,7 @@ const authSlice = createSlice({
             newRefreshToken: string;
             sid: string;
             userData: UserLoginResponse;
-            days: TDay[];
+            days: FormattedDay[];
           }>
         ) => {
           state.isRefreshing = false;
@@ -147,6 +144,8 @@ const authSlice = createSlice({
 export const selectUser = (state: RootState) => state.auth.user;
 export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
 export const selectDate = (state: RootState) => state.auth.date;
+export const selectDay = (state: RootState) => state.auth.days;
+// export const selectName = (state: RootState) => state.auth.user;
 
 export const { setDairyDate } = authSlice.actions;
 export const authReducer = authSlice.reducer;
