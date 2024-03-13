@@ -7,9 +7,8 @@ import { DaySummary, LoggedInUserDailyRate } from "@/types/Dairy";
 import {
   // GetUserInfoResponse,
   UserLoginResponse,
-  UserTodaySummary,
+  // UserTodaySummary,
 } from "@/types/User";
-// import { registration } from "./operations";
 
 type InitialAuthState = {
   isLoading: boolean;

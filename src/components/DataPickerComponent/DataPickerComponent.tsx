@@ -30,10 +30,10 @@ const DataPickerComponent = () => {
     <StyledDataPickerComponent>
       <DatePicker
         className="newProductDate"
-        selected={date}
+        selected={new Date(date)}
         onChange={(date) => {
           if (!date) return;
-          dispatch(setDairyDate(date));
+          dispatch(setDairyDate(date.toISOString()));
         }}
         required
         customInput={<ExampleCustomInput />}

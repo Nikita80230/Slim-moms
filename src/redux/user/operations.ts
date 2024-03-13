@@ -7,7 +7,6 @@ import { RootState } from "../store";
 import {
   AddProductResponse,
   CalculateCaloriesFormData,
-  DaySummary,
   LoggedInUserDailyRate,
   Product,
 } from "@/types/Dairy";
