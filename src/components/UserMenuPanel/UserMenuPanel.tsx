@@ -2,12 +2,15 @@ import { useState } from "react";
 
 import { selectUser } from "@/redux/user/userSlice";
 
-import { useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+
+import { ExitModal } from "@/components";
 
 import { StyledUserMenuPanel } from "./Styled";
-import ExitModal from "../ExitModal/ExitModal";
+import { logOut } from "@/redux/user/operations";
 
 const UserMenuPanel = () => {
+  const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const user = useAppSelector(selectUser);
 
@@ -15,9 +18,10 @@ const UserMenuPanel = () => {
     setIsModalOpen(true);
   };
 
-  // const handleLogOut = () => {
-  //   dispatch(logOut());
-  // };
+  const handleLogOut = () => {
+    dispatch(logOut());
+    setIsModalOpen(false);
+  };
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -31,7 +35,9 @@ const UserMenuPanel = () => {
           Exit
         </button>
       </div>
-      {isModalOpen && <ExitModal onCancel={handleCancel} />}
+      {isModalOpen && (
+        <ExitModal onLogOut={handleLogOut} onCancel={handleCancel} />
+      )}
     </StyledUserMenuPanel>
   );
 };

@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { mapData } from "@/utils/mapData";
+import { mapDayResponseData } from "@/utils/mapDayResponseData";
+import { mapGetUserInfoData } from "@/utils/mapGetUserInfoData";
 
 import { RootState } from "../store";
 
@@ -32,7 +33,7 @@ export const instance = axios.create({
   baseURL: "https://slimmom-backend.goit.global/",
 });
 
-const setToken = (token: string) => {
+const setToken = (token: string | null) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -71,13 +72,24 @@ export const login = createAsyncThunk(
         userData: user,
       };
 
-      return { userData, sid, refreshToken, days: mapData(days) };
+      return { userData, sid, refreshToken, days: mapGetUserInfoData(days) };
     } catch (error: any) {
       toast.error("Upsss, some error occurred, please try again later");
       return thunkApi.rejectWithValue(error.message);
     }
   }
 );
+
+export const logOut = createAsyncThunk("auth/logout", async (_, thunkApi) => {
+  try {
+    const response = await instance.post("/auth/logout");
+    setToken(null);
+    return response;
+  } catch (error) {
+    toast.success("You was successfully logged out!!!");
+    return thunkApi.rejectWithValue(error);
+  }
+});
 
 export const refresh = createAsyncThunk(
   "auth/refresh",
@@ -112,7 +124,7 @@ export const refresh = createAsyncThunk(
         userData,
         sid,
         newRefreshToken,
-        days: mapData(days),
+        days: mapGetUserInfoData(days),
       };
     } catch (error) {
       toast.error("Uppss something went wrong, re-log in fault");
@@ -202,7 +214,7 @@ export const addProduct = createAsyncThunk(
         AddProductResponse | AddFirstProductResponse
       >("/day", formData);
       // console.log("auth/addProduct-->", data);
-      return data;
+      return mapDayResponseData(data);
     } catch (error) {
       toast.error("Upss, smth go wrong, product wasn't added");
       return thunkApi.rejectWithValue(error);

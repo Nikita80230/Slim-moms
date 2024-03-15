@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { isFirstProductResponse } from "@/utils/productTypeGuard";
-
-import { addProduct, getUserDailyRate, login, refresh } from "./operations";
+import {
+  addProduct,
+  getUserDailyRate,
+  login,
+  logOut,
+  refresh,
+} from "./operations";
 import { RootState } from "../store";
 
 import { DaySummary, FormattedDay, LoggedInUserDailyRate } from "@/types/Dairy";
-import {
-  AddFirstProductResponse,
-  AddProductResponse,
-} from "@/types/ResponseTypes";
 import { UserLoginResponse } from "@/types/User";
 
 type InitialAuthState = {
@@ -74,6 +74,22 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state) => {
         state.isLoading = false;
       })
+      .addCase(logOut.pending, (state) => {
+        state.isLoading = true;
+        state.isRefreshing = true;
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        state.refreshToken = null;
+        state.sid = null;
+        state.user = null;
+        state.days = [];
+      })
+      .addCase(logOut.rejected, (state) => {
+        state.isLoading = false;
+        state.isRefreshing = false;
+      })
       .addCase(refresh.pending, (state) => {
         state.isLoading = true;
         state.isRefreshing = true;
@@ -125,14 +141,32 @@ const authSlice = createSlice({
       })
       .addCase(
         addProduct.fulfilled,
-        (
-          state,
-          action: PayloadAction<AddFirstProductResponse | AddProductResponse>
-        ) => {
+        (state, action: PayloadAction<FormattedDay>) => {
           state.isLoading = false;
-          if (isFirstProductResponse(action.payload)) {
+          const isPayloadDayInDays = state.days.some(
+            (day) => day.date === action.payload.date
+          );
+
+          if (isPayloadDayInDays) {
+            console.log("isPayloadDayInDays", isPayloadDayInDays);
+            state.days = state.days.map((day) => {
+              if (day.id === action.payload.id) {
+                return (day = action.payload);
+              } else {
+                return day;
+              }
+            });
           } else {
+            state.days.push(action.payload);
           }
+
+          // state.days = state.days.map((day) => {
+          //   if (day.date !== action.payload.date) {
+          //     state.days.push(action.payload);
+          //   } else {
+          //     day = action.payload;
+          //   }
+          // });
         }
       )
       .addCase(addProduct.rejected, (state) => {
@@ -144,7 +178,7 @@ const authSlice = createSlice({
 export const selectUser = (state: RootState) => state.auth.user;
 export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
 export const selectDate = (state: RootState) => state.auth.date;
-export const selectDay = (state: RootState) => state.auth.days;
+export const selectDays = (state: RootState) => state.auth.days;
 // export const selectName = (state: RootState) => state.auth.user;
 
 export const { setDairyDate } = authSlice.actions;

@@ -1,7 +1,7 @@
 import { FormattedDay } from "@/types/Dairy";
 import { GetUserInfoDayResponse } from "@/types/ResponseTypes";
 
-export const mapData = (data: GetUserInfoDayResponse[]) => {
+export const mapGetUserInfoData = (data: GetUserInfoDayResponse[]) => {
   const formattedData: FormattedDay[] = data.map(
     (day: GetUserInfoDayResponse) => {
       return {

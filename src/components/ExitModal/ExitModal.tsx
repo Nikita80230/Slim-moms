@@ -7,9 +7,10 @@ import { StyledExitModal } from "./Styled";
 
 type Props = {
   onCancel: () => void;
+  onLogOut: () => void;
 };
 
-const ExitModal: FC<Props> = ({ onCancel }) => {
+const ExitModal: FC<Props> = ({ onCancel, onLogOut }) => {
   const handleOverlayClick = (event: { currentTarget: any; target: any }) => {
     if (event.currentTarget === event.target) {
       onCancel();
@@ -24,7 +25,7 @@ const ExitModal: FC<Props> = ({ onCancel }) => {
         </button>
         <p className="text">Do you really want to leave?</p>
         <div className="buttonsWrapper">
-          <button type="button" className="btn acceptBtn">
+          <button type="button" className="btn acceptBtn" onClick={onLogOut}>
             Yes
           </button>
           <button type="button" className="btn cancelBtn" onClick={onCancel}>
