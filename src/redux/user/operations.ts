@@ -11,7 +11,7 @@ import {
   CalculateCaloriesFormData,
   LoggedInUserDailyRate,
   Product,
-} from "@/types/Dairy";
+} from "@/types/Diary";
 import {
   AddFirstProductResponse,
   AddProductResponse,

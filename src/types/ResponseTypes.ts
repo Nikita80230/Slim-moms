@@ -1,4 +1,4 @@
-import { DaySummary, EatenProduct } from "./Dairy";
+import { DaySummary, EatenProduct } from "./Diary";
 
 export type DayResponse = {
   id: string;

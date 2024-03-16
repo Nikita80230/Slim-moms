@@ -1,6 +1,6 @@
 import { isFirstProductResponse } from "./productTypeGuard";
 
-import { FormattedDay } from "@/types/Dairy";
+import { FormattedDay } from "@/types/Diary";
 import {
   AddFirstProductResponse,
   AddProductResponse,

@@ -1,4 +1,4 @@
-import { FormattedDay } from "@/types/Dairy";
+import { FormattedDay } from "@/types/Diary";
 import { GetUserInfoDayResponse } from "@/types/ResponseTypes";
 
 export const mapGetUserInfoData = (data: GetUserInfoDayResponse[]) => {

@@ -72,7 +72,7 @@ const AuthorizedUser = () => {
       {!isTablet && (
         <>
           <NavLink className="headerLink" to={RoutePath.DIARY}>
-            Dairy
+            Diary
           </NavLink>
           <NavLink className="headerLink" to={RoutePath.CALCULATOR}>
             Calculator

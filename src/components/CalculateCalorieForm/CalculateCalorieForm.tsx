@@ -14,7 +14,7 @@ import { InputGroup, Modal } from "@/components";
 
 import { StyledCalculateCalorieForm } from "./Styled";
 
-import { CalculateCaloriesFormData } from "@/types/Dairy";
+import { CalculateCaloriesFormData } from "@/types/Diary";
 
 const personSchema = yup.object({
   height: yup.string().required().min(3).max(3),

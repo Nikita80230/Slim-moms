@@ -9,7 +9,7 @@ import {
 } from "./operations";
 import { RootState } from "../store";
 
-import { DaySummary, FormattedDay, LoggedInUserDailyRate } from "@/types/Dairy";
+import { DaySummary, FormattedDay, LoggedInUserDailyRate } from "@/types/Diary";
 import { UserLoginResponse } from "@/types/User";
 
 type InitialAuthState = {

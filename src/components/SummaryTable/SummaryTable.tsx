@@ -6,7 +6,7 @@ import { useAppSelector } from "@/hooks/hooks";
 
 import { StyledSummaryTable } from "./Styled";
 
-import { DaySummary } from "@/types/Dairy";
+import { DaySummary } from "@/types/Diary";
 
 const initialDaySummary = {
   date: "",
