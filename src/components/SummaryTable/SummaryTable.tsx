@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import { selectDate, selectDays } from "@/redux/user/userSlice";
 
@@ -8,38 +8,31 @@ import { StyledSummaryTable } from "./Styled";
 
 import { DaySummary } from "@/types/Dairy";
 
+const initialDaySummary = {
+  date: "",
+  kcalLeft: 0,
+  kcalConsumed: 0,
+  dailyRate: 0,
+  percentsOfDailyRate: 0,
+  userId: "",
+  _id: "",
+};
+
+const compareDates = (dayDate: string, ISODate: string) => {
+  return dayDate === ISODate.slice(0, 10);
+};
+
 const SummaryTable = () => {
   const days = useAppSelector(selectDays);
   const date = useAppSelector(selectDate);
 
-  const [currentDaySummary, setCurrentDaySummary] = useState<DaySummary>({
-    date: "",
-    kcalLeft: 0,
-    kcalConsumed: 0,
-    dailyRate: 0,
-    percentsOfDailyRate: 0,
-    userId: "",
-    _id: "",
-  });
+  const isDateInDays = days.some((day) => compareDates(day.date, date));
 
-  useEffect(() => {
-    for (const day of days) {
-      if (date.slice(0, 10) === day.date) {
-        console.log("in useEffect", date.slice(0, 10));
-        setCurrentDaySummary(day.daySummary);
-      } else {
-        setCurrentDaySummary({
-          date: "",
-          kcalLeft: 0,
-          kcalConsumed: 0,
-          dailyRate: 0,
-          percentsOfDailyRate: 0,
-          userId: "",
-          _id: "",
-        });
-      }
-    }
-  }, [date, days]);
+  const currentDaySummary: DaySummary = isDateInDays
+    ? days.find((day) => compareDates(day.date, date))!.daySummary
+    : initialDaySummary;
+
+  if (!isDateInDays) toast.info("You haven`t added any food for this day");
 
   return (
     <StyledSummaryTable>

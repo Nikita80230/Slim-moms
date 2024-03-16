@@ -78,13 +78,8 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.isRefreshing = true;
       })
-      .addCase(logOut.fulfilled, (state) => {
-        state.isLoading = false;
-        state.isLoggedIn = false;
-        state.refreshToken = null;
-        state.sid = null;
-        state.user = null;
-        state.days = [];
+      .addCase(logOut.fulfilled, () => {
+        return initialAuthState;
       })
       .addCase(logOut.rejected, (state) => {
         state.isLoading = false;
@@ -148,25 +143,15 @@ const authSlice = createSlice({
           );
 
           if (isPayloadDayInDays) {
-            console.log("isPayloadDayInDays", isPayloadDayInDays);
             state.days = state.days.map((day) => {
               if (day.id === action.payload.id) {
-                return (day = action.payload);
-              } else {
-                return day;
+                return action.payload;
               }
+              return day;
             });
           } else {
             state.days.push(action.payload);
           }
-
-          // state.days = state.days.map((day) => {
-          //   if (day.date !== action.payload.date) {
-          //     state.days.push(action.payload);
-          //   } else {
-          //     day = action.payload;
-          //   }
-          // });
         }
       )
       .addCase(addProduct.rejected, (state) => {
@@ -179,6 +164,8 @@ export const selectUser = (state: RootState) => state.auth.user;
 export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
 export const selectDate = (state: RootState) => state.auth.date;
 export const selectDays = (state: RootState) => state.auth.days;
+export const selectNotAllowedProducts = (state: RootState) =>
+  state.auth.user?.userData.notAllowedProducts;
 // export const selectName = (state: RootState) => state.auth.user;
 
 export const { setDairyDate } = authSlice.actions;

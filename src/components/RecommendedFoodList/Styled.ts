@@ -13,6 +13,25 @@ export const StyledRecommendedFoodList = styled.div`
     color: #212121;
   }
 
+  .foodList {
+    max-height: 120px;
+
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 30%;
+      border-radius: 2px;
+      background: #264061;
+    }
+  }
+
   .listItem:not(:last-child) {
     margin-bottom: 20px;
   }

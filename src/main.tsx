@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <PersistGate persistor={persistor}>
           <ThemeProvider theme={theme}>
             <App />
-            <ToastContainer />
+            <ToastContainer autoClose={2000} />
           </ThemeProvider>
         </PersistGate>
       </Provider>
