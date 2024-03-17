@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { logOut } from "@/redux/user/operations";
 import { selectUser } from "@/redux/user/userSlice";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
@@ -7,7 +8,6 @@ import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { ExitModal } from "@/components";
 
 import { StyledUserMenuPanel } from "./Styled";
-import { logOut } from "@/redux/user/operations";
 
 const UserMenuPanel = () => {
   const dispatch = useAppDispatch();

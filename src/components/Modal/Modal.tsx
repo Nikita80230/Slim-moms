@@ -5,20 +5,24 @@ import { Link } from "react-router-dom";
 
 import closeModalImg from "@/assets/images/closeModalImg.svg";
 import IconMobileCloseBtnSvg from "@/assets/images/mobileCloseBtnSvg.svg?react";
+import { RecommendedFoodList } from "@/components";
 import { RoutePath } from "@/routes/routes";
 
 import { StyledModal } from "./Styled";
 
+import { NotAllowProductList } from "@/types/Diary";
+
 type Props = {
   closeModal: () => void;
   isOpen: boolean;
+  modalData: NotAllowProductList;
 };
 
 interface KeyboardEvent {
   key: string;
 }
 
-const Modal: FC<Props> = ({ closeModal }) => {
+const Modal: FC<Props> = ({ closeModal, modalData }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 564px)" });
 
   const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -60,16 +64,23 @@ const Modal: FC<Props> = ({ closeModal }) => {
         )}
         <h2 className="modalTitle">Your recommended daily calorie intake is</h2>
         <p className="modalCaloriesAmount">
-          2800
+          {modalData.dailyRate}
           <span className="modalCaloriesUnits"> ккал</span>
         </p>
-        <h4 className="modalListTitle">Foods you should not eat</h4>
+        <RecommendedFoodList listOfProducts={modalData.notAllowedProducts} />
+        {/* <h4 className="modalListTitle">Foods you should not eat</h4>
+        <InputGroup
+            name="notAllowedProduct"
+            labelText="search"
+            value={query}
+            onChange={handleChange}
+          />
         <ol className="modalList">
           <li className="modalListItem">Flour products</li>
           <li className="modalListItem">Milk</li>
           <li className="modalListItem">Red meat</li>
           <li className="modalListItem">Smoked meats</li>
-        </ol>
+        </ol> */}
         <Link className="modalRegisterLink" to={RoutePath.REGISTER}>
           <button className="modalRegisterBtn" type="button">
             Start losing weight

@@ -10,6 +10,7 @@ import { RootState } from "../store";
 import {
   CalculateCaloriesFormData,
   LoggedInUserDailyRate,
+  NotAllowProductList,
   Product,
 } from "@/types/Diary";
 import {
@@ -150,14 +151,15 @@ export const getNotAllowProductList = createAsyncThunk(
     thunkApi
   ) => {
     try {
-      const response = await instance.post(
+      const { data } = await instance.post<NotAllowProductList>(
         "/daily-rate",
         userCalculateCaloriesFormData
       );
 
-      console.log("getNotAllowProductList-->", response.data);
+      console.log("getNotAllowProductList ThunkResponse-->", data);
+      return data;
     } catch (error) {
-      thunkApi.rejectWithValue(error);
+      return thunkApi.rejectWithValue(error);
     }
   }
 );

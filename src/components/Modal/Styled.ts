@@ -21,7 +21,7 @@ export const StyledModal = styled.div`
     display: flex;
     flex-direction: column;
 
-    padding: 64px 82px;
+    padding: 50px 82px;
 
     max-width: 672px;
     width: 100%;
@@ -117,6 +117,7 @@ export const StyledModal = styled.div`
   }
   .modalRegisterLink {
     margin: 0 auto;
+    margin-top: auto;
 
     text-decoration: none;
   }

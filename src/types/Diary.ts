@@ -63,3 +63,8 @@ export type FormattedDay = {
   date: string;
   daySummary: DaySummary;
 };
+
+export type NotAllowProductList = {
+  dailyRate: number;
+  notAllowedProducts: string[];
+};

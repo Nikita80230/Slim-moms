@@ -1,41 +1,64 @@
-import { useAppSelector } from "@/hooks/hooks";
-import { StyledRecommendedFoodList } from "./Styled";
-import { selectNotAllowedProducts } from "@/redux/user/userSlice";
-import { ChangeEvent, useMemo, useState } from "react";
-import { InputGroup } from "..";
+import { ChangeEvent, FC, useMemo, useState } from "react";
 
-const RecommendedFoodList = () => {
+import {
+  selectIsLoggedIn,
+  selectNotAllowedProducts,
+} from "@/redux/user/userSlice";
+
+import { useAppSelector } from "@/hooks/hooks";
+
+import { InputGroup } from "@/components";
+
+import { StyledRecommendedFoodList } from "./Styled";
+
+type Props = {
+  listOfProducts: string[];
+};
+
+const RecommendedFoodList: FC<Props> = ({ listOfProducts }) => {
   const [query, setQuery] = useState<string>("");
 
   const notAllowedProducts = useAppSelector(selectNotAllowedProducts);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  const filteredProducts = useMemo(
-    () =>
-      notAllowedProducts?.filter((product) =>
+  const filteredProducts = useMemo(() => {
+    if (isLoggedIn) {
+      return notAllowedProducts?.filter((product) =>
         product.toLowerCase().includes(query.toLowerCase().trim())
-      ),
-    [notAllowedProducts, query]
-  );
+      );
+    } else {
+      return listOfProducts?.filter((product) =>
+        product.toLowerCase().includes(query.toLowerCase().trim())
+      );
+    }
+  }, [isLoggedIn, listOfProducts, notAllowedProducts, query]);
 
   return (
     <StyledRecommendedFoodList>
       <h3 className="foodListTitle">Food not recommended</h3>
-      <InputGroup
-        name="notAllowedProduct"
-        labelText="search"
-        value={query}
-        onChange={handleChange}
-      />
-      <ul className="foodList">
-        {filteredProducts?.map((product) => {
-          return <li className="listItem">{product} </li>;
-        })}
-        <li className="listItem">Flour products </li>
-      </ul>
+
+      {notAllowedProducts?.length || listOfProducts?.length ? (
+        <>
+          <InputGroup
+            name="notAllowedProduct"
+            labelText="search"
+            value={query}
+            onChange={handleChange}
+          />
+
+          <ul className="foodList">
+            {filteredProducts?.map((product) => {
+              return <li className="listItem">{product} </li>;
+            })}
+          </ul>
+        </>
+      ) : (
+        <span className="listItem">There is no diary info!!! </span>
+      )}
     </StyledRecommendedFoodList>
   );
 };

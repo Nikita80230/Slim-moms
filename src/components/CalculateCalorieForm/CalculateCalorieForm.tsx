@@ -14,7 +14,7 @@ import { InputGroup, Modal } from "@/components";
 
 import { StyledCalculateCalorieForm } from "./Styled";
 
-import { CalculateCaloriesFormData } from "@/types/Diary";
+import { CalculateCaloriesFormData, NotAllowProductList } from "@/types/Diary";
 
 const personSchema = yup.object({
   height: yup.string().required().min(3).max(3),
@@ -28,6 +28,24 @@ const CalculateCalorieForm = () => {
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const [modalData, setModalData] = useState<NotAllowProductList>({
+    dailyRate: 0,
+    notAllowedProducts: [],
+  });
+
+  const handleModal = (data: CalculateCaloriesFormData) => {
+    setIsModalOpen(true);
+    dispatch(getNotAllowProductList(data))
+      .unwrap()
+      .then((responseData) => {
+        console.log("CalculateCalorieForm ResponseData-->", responseData);
+        responseData && setModalData(responseData);
+        console.log("CalculateCalorieForm modalData-->", modalData);
+        return responseData;
+      });
+  };
+
+  // console.log("CalculateCalorieForm-->", modalData);
 
   const formik = useFormik<CalculateCaloriesFormData<string>>({
     initialValues: {
@@ -48,9 +66,14 @@ const CalculateCalorieForm = () => {
       };
       if (isLoggedIn) {
         dispatch(getUserDailyRate(userCalculateCaloriesFormData));
+        setModalData({
+          dailyRate: 0,
+          notAllowedProducts: [],
+        });
       } else {
-        dispatch(getNotAllowProductList(userCalculateCaloriesFormData));
-        setIsModalOpen(true);
+        // dispatch(getNotAllowProductList(userCalculateCaloriesFormData));
+        handleModal(userCalculateCaloriesFormData);
+        // console.log("CalculateCalorieForm-->", modalData);
       }
     },
   });
@@ -149,7 +172,13 @@ const CalculateCalorieForm = () => {
           Start losing weight
         </button>
       </form>
-      {isModalOpen && <Modal closeModal={handleCancel} isOpen={isModalOpen} />}
+      {isModalOpen && (
+        <Modal
+          closeModal={handleCancel}
+          isOpen={isModalOpen}
+          modalData={modalData}
+        />
+      )}
     </StyledCalculateCalorieForm>
   );
 };
