@@ -12,7 +12,7 @@ import { InputGroup } from "@/components";
 import { StyledRecommendedFoodList } from "./Styled";
 
 type Props = {
-  listOfProducts: string[];
+  listOfProducts?: string[];
 };
 
 const RecommendedFoodList: FC<Props> = ({ listOfProducts }) => {
