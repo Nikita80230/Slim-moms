@@ -6,8 +6,9 @@ export const StyledAddNewProductMobileForm = styled.div`
   padding-top: 80px;
 
   .addProductCloseBtn {
+    z-index: 3;
     position: absolute;
-    top: -130px;
+    top: -68px;
     left: 0;
 
     padding: 15px;
@@ -52,5 +53,37 @@ export const StyledAddNewProductMobileForm = styled.div`
     @media (max-width: 370px) {
       padding: 13px 34px;
     }
+  }
+
+  /* =============selector-styles=============== */
+
+  .select__indicator,
+  .select__indicator-separator {
+    display: none;
+  }
+
+  .select__input-container,
+  .select__single-value,
+  .select__placeholder {
+    color: #9b9faa;
+  }
+  .select__control {
+    border-color: #e0e0e0b5;
+    border-radius: unset;
+    border-style: unset;
+    border-bottom-style: solid;
+    border-width: 1px;
+    transition: all 0.3s;
+
+    min-height: 28px;
+
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: #9b9faa;
+    background-color: transparent;
+  }
+  .select__control:hover {
+    border-color: #fc842d;
   }
 `;

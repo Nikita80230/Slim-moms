@@ -52,7 +52,11 @@ const RecommendedFoodList: FC<Props> = ({ listOfProducts }) => {
 
           <ul className="foodList">
             {filteredProducts?.map((product) => {
-              return <li className="listItem">{product} </li>;
+              return (
+                <li className="listItem" key={product}>
+                  {product}{" "}
+                </li>
+              );
             })}
           </ul>
         </>

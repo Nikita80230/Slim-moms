@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledProductsTable = styled.div`
   width: 100%;
+  min-height: 300px;
 
   .table {
     display: flex;
@@ -86,5 +87,17 @@ export const StyledProductsTable = styled.div`
 
       background: transparent;
     }
+  }
+
+  .emptyProductListTitle {
+    text-align: center;
+    color: #9b9faa;
+
+    font-family: inherit;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.56px;
   }
 `;

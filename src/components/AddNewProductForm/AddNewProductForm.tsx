@@ -70,13 +70,6 @@ const AddNewProductForm = () => {
           }}
           placeholder={<div>Enter product name</div>}
         />
-        {/* <InputGroup
-          onChange={handleSearchQuery}
-          value={searchQuery}
-          className="productName"
-          name="productName"
-          labelText="Enter product name"
-        /> */}
         <InputGroup
           onChange={formik.handleChange}
           value={formik.values.weight}

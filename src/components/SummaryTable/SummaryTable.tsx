@@ -7,6 +7,8 @@ import { useAppSelector } from "@/hooks/hooks";
 import { StyledSummaryTable } from "./Styled";
 
 import { DaySummary } from "@/types/Diary";
+import { useEffect } from "react";
+import { compareDates } from "@/utils/compareDates";
 
 const initialDaySummary = {
   date: "",
@@ -16,10 +18,6 @@ const initialDaySummary = {
   percentsOfDailyRate: 0,
   userId: "",
   _id: "",
-};
-
-const compareDates = (dayDate: string, ISODate: string) => {
-  return dayDate === ISODate.slice(0, 10);
 };
 
 const SummaryTable = () => {
@@ -32,7 +30,9 @@ const SummaryTable = () => {
     ? days.find((day) => compareDates(day.date, date))!.daySummary
     : initialDaySummary;
 
-  if (!isDateInDays) toast.info("You haven`t added any food for this day");
+  useEffect(() => {
+    if (!isDateInDays) toast.info("You haven`t added any food for this day");
+  }, [isDateInDays]);
 
   return (
     <StyledSummaryTable>
@@ -49,13 +49,19 @@ const SummaryTable = () => {
             {currentDaySummary.kcalLeft.toFixed()} kcal
           </div>
           <div className="value">
-            {currentDaySummary.kcalConsumed.toFixed()} kcal
+            {Number(currentDaySummary.kcalConsumed.toFixed()) < 0
+              ? 0
+              : currentDaySummary.kcalConsumed.toFixed()}{" "}
+            kcal
           </div>
           <div className="value">
             {currentDaySummary.dailyRate.toFixed()} kcal
           </div>
           <div className="value">
-            {currentDaySummary.percentsOfDailyRate.toFixed()} %
+            {Number(currentDaySummary.percentsOfDailyRate.toFixed()) < 0
+              ? 0
+              : currentDaySummary.percentsOfDailyRate.toFixed()}{" "}
+            %
           </div>
         </div>
       </div>

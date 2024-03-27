@@ -1,14 +1,19 @@
-import { nanoid } from "@reduxjs/toolkit";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import AsyncSelect from "react-select/async";
 import * as yup from "yup";
+
+import { addProduct, getProductListByQuery } from "@/redux/user/operations";
+import { selectDate } from "@/redux/user/userSlice";
+
+import { useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch } from "@/hooks/hooks";
 
 import IconMobileCloseBtnSvg from "@/assets/images/mobileCloseBtnSvg.svg?react";
 import { InputGroup } from "@/components";
 import { RoutePath } from "@/routes/routes";
 
 import { StyledAddNewProductMobileForm } from "./Styled";
-// import { useAppDispatch } from "@/hooks/hooks";
 
 const productSchema = yup.object({
   productName: yup.string(),
@@ -17,21 +22,39 @@ const productSchema = yup.object({
 });
 
 const AddNewProductMobileForm = () => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const date = useAppSelector(selectDate);
+
+  const loadOptions = (
+    inputValue: string,
+    callback: (options: { value: string; label: string; id: string }[]) => void
+  ) => {
+    dispatch(getProductListByQuery(inputValue))
+      .unwrap()
+      .then((data) => {
+        console.log("data from component-->", data);
+        const formattedData = data.map(({ _id, title: { en } }) => {
+          return { value: en, label: en, id: _id };
+        });
+        console.log(formattedData);
+        callback(formattedData);
+      });
+  };
 
   const formik = useFormik({
     initialValues: {
-      productName: "",
+      id: "",
       weight: "",
     },
     validationSchema: productSchema,
     onSubmit: (values) => {
       const addNewProductFormData = {
-        weight: +values.weight,
-        data: "",
-        id: nanoid(),
+        weight: Number(values.weight),
+        date: date.slice(0, 10),
+        productId: values.id,
       };
       console.log("addNewProductFormData --> ", addNewProductFormData);
+      dispatch(addProduct(addNewProductFormData));
       // dispatch(getNotAllowProductList(userCalculateCaloriesFormData));
       // setIsModalOpen(true);
     },
@@ -46,13 +69,24 @@ const AddNewProductMobileForm = () => {
       </Link>
       <form className="addProductForm" onSubmit={formik.handleSubmit}>
         <div className="formInputs">
-          <InputGroup
-            value={formik.values.productName}
+          <AsyncSelect
+            className="basic-single formInput"
+            classNamePrefix="select"
+            name="color"
+            loadOptions={loadOptions}
+            onChange={(item) => {
+              // console.log(item);
+              formik.setFieldValue("id", item?.id);
+            }}
+            placeholder={<div>Enter product name</div>}
+          />
+          {/* <InputGroup
+            value={formik.values.id}
             onChange={formik.handleChange}
             className="formInput"
             name="productName"
             labelText="Enter product name"
-          />
+          /> */}
           <InputGroup
             onChange={formik.handleChange}
             value={formik.values.weight}

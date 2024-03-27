@@ -38,12 +38,12 @@ const CalculateCalorieForm = () => {
     dispatch(getNotAllowProductList(data))
       .unwrap()
       .then((responseData) => {
-        console.log("CalculateCalorieForm ResponseData-->", responseData);
         responseData && setModalData(responseData);
-        console.log("CalculateCalorieForm modalData-->", modalData);
         return responseData;
       });
   };
+
+
 
   // console.log("CalculateCalorieForm-->", modalData);
 

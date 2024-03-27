@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
   addProduct,
+  deleteProduct,
   getUserDailyRate,
   login,
   logOut,
@@ -58,6 +59,7 @@ const authSlice = createSlice({
           action: PayloadAction<{
             refreshToken: string;
             sid: string;
+            accessToken: string;
             userData: UserLoginResponse;
             days: FormattedDay[];
           }>
@@ -67,6 +69,7 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
           state.refreshToken = action.payload.refreshToken;
           state.sid = action.payload.sid;
+          state.accessToken = action.payload.accessToken;
           state.user = action.payload.userData;
           state.days = action.payload.days;
         }
@@ -95,6 +98,7 @@ const authSlice = createSlice({
           state,
           action: PayloadAction<{
             newRefreshToken: string;
+            newAccessToken: string;
             sid: string;
             userData: UserLoginResponse;
             days: FormattedDay[];
@@ -105,6 +109,7 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
           state.refreshToken = action.payload.newRefreshToken;
           state.sid = action.payload.sid;
+          state.accessToken = action.payload.newAccessToken;
           state.user = action.payload.userData;
           state.days = action.payload.days;
         }
@@ -155,6 +160,33 @@ const authSlice = createSlice({
         }
       )
       .addCase(addProduct.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        deleteProduct.fulfilled,
+        (
+          state,
+          action: PayloadAction<{
+            newDaySummary: DaySummary;
+            eatenProductId: string;
+          }>
+        ) => {
+          state.isLoading = false;
+
+          state.days.map((day) => {
+            if (day.date === action.payload.newDaySummary.date) {
+              day.daySummary = action.payload.newDaySummary;
+              day.eatenProducts = day.eatenProducts.filter(
+                (product) => product.id !== action.payload.eatenProductId
+              );
+            }
+          });
+        }
+      )
+      .addCase(deleteProduct.rejected, (state) => {
         state.isLoading = false;
       });
   },

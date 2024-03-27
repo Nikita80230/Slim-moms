@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+import { deleteProductDataMapper } from "@/utils/deleteProductDataMapper";
 import { mapDayResponseData } from "@/utils/mapDayResponseData";
 import { mapGetUserInfoData } from "@/utils/mapGetUserInfoData";
 
@@ -44,7 +45,7 @@ export const registration = createAsyncThunk(
     try {
       const response = await instance.post("/auth/register", registerFormData);
       toast.success("You was successfully registered, please login!!!");
-      // console.log("response ", response.data);
+      console.log("response registration", response.data);
       return response.data;
     } catch (error: any) {
       toast.error("Upsss, some error occurred, please try again later");
@@ -73,7 +74,13 @@ export const login = createAsyncThunk(
         userData: user,
       };
 
-      return { userData, sid, refreshToken, days: mapGetUserInfoData(days) };
+      return {
+        userData,
+        sid,
+        refreshToken,
+        accessToken,
+        days: mapGetUserInfoData(days),
+      };
     } catch (error: any) {
       toast.error("Upsss, some error occurred, please try again later");
       return thunkApi.rejectWithValue(error.message);
@@ -125,6 +132,7 @@ export const refresh = createAsyncThunk(
         userData,
         sid,
         newRefreshToken,
+        newAccessToken,
         days: mapGetUserInfoData(days),
       };
     } catch (error) {
@@ -156,7 +164,6 @@ export const getNotAllowProductList = createAsyncThunk(
         userCalculateCaloriesFormData
       );
 
-      console.log("getNotAllowProductList ThunkResponse-->", data);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -177,9 +184,10 @@ export const getUserDailyRate = createAsyncThunk(
         `/daily-rate/${userId}`,
         userCalculateCaloriesFormData
       );
-
+      toast.success("Your parameters have been added");
       return data;
     } catch (error) {
+      toast.error("Upsss, Invalid form data check field's values");
       return rejectWithValue(error);
     }
   }
@@ -195,7 +203,7 @@ export const getProductListByQuery = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error) {
-      toast.error("Please, count your daily rate first");
+      toast.error(`${error}`);
       return thunkApi.rejectWithValue(error);
     }
   }
@@ -220,6 +228,43 @@ export const addProduct = createAsyncThunk(
     } catch (error) {
       toast.error("Upss, smth go wrong, product wasn't added");
       return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteProduct = createAsyncThunk(
+  "auth/deleteProduct",
+  async (
+    ids: { dayId: string; eatenProductId: string },
+    { getState, rejectWithValue }
+  ) => {
+    const state = getState() as RootState;
+    const accessToken = state.auth.accessToken;
+
+    try {
+      const response = await fetch("https://slimmom-backend.goit.global/day", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(ids), // body data type must match "Content-Type" header
+      });
+      // console.log("auth/addProduct-->", data);
+      // return mapDayResponseData(data);
+      const { newDaySummary } = await response.json();
+      console.log(
+        "deleteProductDataMapper(newDaySummary)",
+        deleteProductDataMapper(newDaySummary)
+      );
+      return {
+        newDaySummary: deleteProductDataMapper(newDaySummary),
+        eatenProductId: ids.eatenProductId,
+      };
+    } catch (error) {
+      toast.error("Upss, smth go wrong, product wasn't deleted");
+      return rejectWithValue(error);
     }
   }
 );

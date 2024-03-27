@@ -37,4 +37,8 @@ export const StyledDataPickerComponent = styled.div`
   .dateImg {
     margin-left: 20px;
   }
+
+  @media (max-width: 564px) {
+    justify-content: center;
+  }
 `;
