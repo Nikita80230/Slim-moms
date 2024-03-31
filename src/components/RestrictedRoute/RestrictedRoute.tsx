@@ -21,11 +21,11 @@ const RestrictedRoute: FC<Props> = ({
 
   if (isLoggedIn && userDailyRate) {
     return <Navigate to={redirectTo} replace />;
-  } else if (isLoggedIn) {
-    return <Navigate to={RoutePath.CALCULATOR} replace />;
-  } else {
-    return children;
   }
+  if (isLoggedIn) {
+    return <Navigate to={RoutePath.CALCULATOR} replace />;
+  }
+  return children;
 };
 
 export default RestrictedRoute;

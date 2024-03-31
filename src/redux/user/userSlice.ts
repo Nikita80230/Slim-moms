@@ -198,7 +198,8 @@ export const selectDate = (state: RootState) => state.auth.date;
 export const selectDays = (state: RootState) => state.auth.days;
 export const selectNotAllowedProducts = (state: RootState) =>
   state.auth.user?.userData.notAllowedProducts;
-// export const selectName = (state: RootState) => state.auth.user;
+export const selectDailyRate = (state: RootState) =>
+  state.auth.user?.userData.dailyRate;
 
 export const { setDairyDate } = authSlice.actions;
 export const authReducer = authSlice.reducer;

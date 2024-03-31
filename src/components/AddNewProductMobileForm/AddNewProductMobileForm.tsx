@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { debounce } from "lodash";
 import { Link } from "react-router-dom";
 import AsyncSelect from "react-select/async";
 import * as yup from "yup";
@@ -25,21 +26,26 @@ const AddNewProductMobileForm = () => {
   const dispatch = useAppDispatch();
   const date = useAppSelector(selectDate);
 
-  const loadOptions = (
-    inputValue: string,
-    callback: (options: { value: string; label: string; id: string }[]) => void
-  ) => {
-    dispatch(getProductListByQuery(inputValue))
-      .unwrap()
-      .then((data) => {
-        console.log("data from component-->", data);
-        const formattedData = data.map(({ _id, title: { en } }) => {
-          return { value: en, label: en, id: _id };
+  const loadOptions = debounce(
+    (
+      inputValue: string,
+      callback: (
+        options: { value: string; label: string; id: string }[]
+      ) => void
+    ) => {
+      dispatch(getProductListByQuery(inputValue))
+        .unwrap()
+        .then((data) => {
+          console.log("data from component-->", data);
+          const formattedData = data.map(({ _id, title: { en } }) => {
+            return { value: en, label: en, id: _id };
+          });
+          console.log(formattedData);
+          callback(formattedData);
         });
-        console.log(formattedData);
-        callback(formattedData);
-      });
-  };
+    },
+    500
+  );
 
   const formik = useFormik({
     initialValues: {

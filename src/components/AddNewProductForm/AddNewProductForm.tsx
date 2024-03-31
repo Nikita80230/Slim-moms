@@ -13,6 +13,8 @@ import { InputGroup } from "@/components";
 
 import { StyledAddNewProductForm } from "./Styled";
 
+import { debounce } from "lodash";
+
 const productSchema = yup.object({
   id: yup.string(),
   date: yup.string(),
@@ -23,21 +25,26 @@ const AddNewProductForm = () => {
   const date = useAppSelector(selectDate);
   const dispatch = useAppDispatch();
 
-  const loadOptions = (
-    inputValue: string,
-    callback: (options: { value: string; label: string; id: string }[]) => void
-  ) => {
-    dispatch(getProductListByQuery(inputValue))
-      .unwrap()
-      .then((data) => {
-        console.log("data from component-->", data);
-        const formattedData = data.map(({ _id, title: { en } }) => {
-          return { value: en, label: en, id: _id };
+  const loadOptions = debounce(
+    (
+      inputValue: string,
+      callback: (
+        options: { value: string; label: string; id: string }[]
+      ) => void
+    ) => {
+      dispatch(getProductListByQuery(inputValue))
+        .unwrap()
+        .then((data) => {
+          console.log("data from component-->", data);
+          const formattedData = data.map(({ _id, title: { en } }) => {
+            return { value: en, label: en, id: _id };
+          });
+          console.log(formattedData);
+          callback(formattedData);
         });
-        console.log(formattedData);
-        callback(formattedData);
-      });
-  };
+    },
+    500
+  );
 
   const formik = useFormik({
     initialValues: {
@@ -86,3 +93,14 @@ const AddNewProductForm = () => {
 };
 
 export default AddNewProductForm;
+
+// debounce(() => dispatch(getProductListByQuery(inputValue))
+//       .unwrap()
+//       .then((data) => {
+//         console.log("data from component-->", data);
+//         const formattedData = data.map(({ _id, title: { en } }) => {
+//           return { value: en, label: en, id: _id };
+//         });
+//         console.log(formattedData);
+//         callback(formattedData);
+//       }), 150);

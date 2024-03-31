@@ -48,8 +48,9 @@ export const registration = createAsyncThunk(
       console.log("response registration", response.data);
       return response.data;
     } catch (error: any) {
-      toast.error("Upsss, some error occurred, please try again later");
-      return thunkApi.rejectWithValue(error.message);
+      console.log(error);
+      toast.error(`${error.response.data.message}`);
+      return thunkApi.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -202,8 +203,8 @@ export const getProductListByQuery = createAsyncThunk(
       );
       console.log(data);
       return data;
-    } catch (error) {
-      toast.error(`${error}`);
+    } catch (error: any) {
+      toast.error(`${error.response.data.message}`);
       return thunkApi.rejectWithValue(error);
     }
   }

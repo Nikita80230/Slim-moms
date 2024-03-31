@@ -1,14 +1,19 @@
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-import { selectDate, selectDays } from "@/redux/user/userSlice";
+import {
+  selectDailyRate,
+  selectDate,
+  selectDays,
+} from "@/redux/user/userSlice";
 
 import { useAppSelector } from "@/hooks/hooks";
+
+import { compareDates } from "@/utils/compareDates";
 
 import { StyledSummaryTable } from "./Styled";
 
 import { DaySummary } from "@/types/Diary";
-import { useEffect } from "react";
-import { compareDates } from "@/utils/compareDates";
 
 const initialDaySummary = {
   date: "",
@@ -23,6 +28,7 @@ const initialDaySummary = {
 const SummaryTable = () => {
   const days = useAppSelector(selectDays);
   const date = useAppSelector(selectDate);
+  const dailyRate = useAppSelector(selectDailyRate);
 
   const isDateInDays = days.some((day) => compareDates(day.date, date));
 
@@ -33,6 +39,8 @@ const SummaryTable = () => {
   useEffect(() => {
     if (!isDateInDays) toast.info("You haven`t added any food for this day");
   }, [isDateInDays]);
+
+  console.log(dailyRate);
 
   return (
     <StyledSummaryTable>
@@ -54,9 +62,7 @@ const SummaryTable = () => {
               : currentDaySummary.kcalConsumed.toFixed()}{" "}
             kcal
           </div>
-          <div className="value">
-            {currentDaySummary.dailyRate.toFixed()} kcal
-          </div>
+          <div className="value">{dailyRate?.toFixed() ?? 0} kcal</div>
           <div className="value">
             {Number(currentDaySummary.percentsOfDailyRate.toFixed()) < 0
               ? 0
